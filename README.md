@@ -23,3 +23,5 @@ Ukazi SQL (potrebni za poizvedbo) bi bili seveda »zamaskirani« v gumbe, ker ne
 Uporabnik bi lahko izbral ustrezno »tabelo« oziroma kategorijo, ki ga zanima, potem pa z vnosom niza oziroma številke dobil ustrezne rezultate. (npr. klik na ID računa, vnesel bi ustrezno številko in bi dobil vse podatke o tem izdanem računu)
 Imel bi npr. gumbe za vnos oziroma popravek količine pijače/hrane v shrambi. S klikom na ustrezno mesto v tabeli, bi lahko popravil vnos (npr. podatke o zaposlenih, seveda pa ne znesek računa).
 Če bi želeli iz ponudbe umakniti določeno pijačo, bi za to poskrbel drug gumb, ipd…
+
+![alt text](http://shrani.si/f/2h/w4/1hrJomVs/diagram.png "ER Diagram")
