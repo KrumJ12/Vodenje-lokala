@@ -1,0 +1,82 @@
+Viljamovka 	0,03l 	40% 	3,00 €
+Martell 	0,03l 	40% 	4,20 €
+Travarica 	0,03l 	40% 	1,80 €
+Gorenjski sadjevec 	0,03l 	40% 	1,80 €
+Vechia 	0,03l 	40% 	1,80 €
+Gin 	0,03l 	40% 	2,00 €
+Vodka 	0,03l 	40% 	2,00 €
+Stock 	0,03l 	40% 	2,00 €
+Underberg 	0,02l 	44% 	2,80 €
+Lozovača 	0,03l 	40% 	1,80 €
+Rum 	0,03l 	40% 	1,80 €
+Chivas Regal 	0,03l 	40% 	3,90 €
+Jack Daniel's 	0,03l 	40% 	2,80 €
+Ballantine's 	0,03l 	40% 	2,60 €
+C. C. 	0,03l 	40% 	2,60 €
+Brinjevec 	0,03l 	40% 	1,60 €
+Vinjak 	0,03l 	40% 	1,80 €
+Sierra tequilla 	0,03l 	38% 	2,20 €
+Vinjak pilon 	0,03l 	40% 	18,00 €
+Hennessy 	0,03l 	40% 	5,50 €
+Black bush 	0,03l 	40% 	5,00 €
+Gorki list 	0,03l 	40% 	2,50 €
+Jameson 	0,03l 	40% 	2,80 €
+Pelinkovec 	0,03l 	28% 	1,80 €
+Slivovka 	0,03l 	40% 	1,80 €
+Carolans 	0,03l 	17% 	2,60 €
+Campari 	0,03l 	18% 	2,60 €
+Cynar 	0,03l 	17% 	2,00 €
+Malibu 	0,03l 	21% 	2,60 €
+Borovničevec 	0,03l 	25% 	1,80 €
+Radenska, steklenica	1,0l 	  	4,00€
+Radenska, steklenica 	0,5l 	  	2,50€
+Radenska, steklenica 	0,25l 	  	1,50€
+Coca-cola / Fanta	1,0l 	  	8,00€
+Coca-cola, steklenica	0,25l 	  	1,90€
+Fanta, steklenica 0,25l 	  	1,90€
+Sprite, steklenica	0,25l 	  	1,90€
+Schweppes, steklenica	0,25l 	  	1,90€
+Red bull 0,25l 	  	2,80€
+Ledeni čaj	0,33l 	  	1,90€
+Cedevita	0,20l 	  	1,50€
+Cocta, steklenica 	0,25l 	  	1,90€
+Fanta fany 	0,20l 	  	1,50€
+Sok, razni okusi	0,20l 	  	2,20€
+Voda, brez okusa	0,50l 	  	1,80€
+Voda, z okusom	0,50l 	  	1,80€
+Jagoda	1,0l 	  	8,00€
+Breskev 1,0l 	  	8,00€
+Ribez	1,0l 	  	8,00€
+Pomaranča	1,0l 	  	8,00€
+Sokovi, razni	0,1l 	  	0,80€
+Naravna limonada	0,1l 	  	2,00€
+Turška kava	  	  	1,20 €
+Kava	  	  	1,10 €
+Kava z mlekom	  	  	1,20 €
+Capuccino	  	  	1,20 €
+Kava s smetano	  	  	1,80 €
+Bela kava	  	  	1,60 €
+Čaj z limono	  	  	1,40 €
+Sadni čaj	  	  	1,00 €
+Čaj 	  	  	1,20 €
+Pravi čaj	  	  	1,50 €
+Pravi čaj z mlekom	  	  	1,70 €
+Kakav	  	  	1,60 €
+Kakav s smetano	  	  	1,90 €
+Mleko	0,10l 	  	0,40 €
+Grog	  	  	3,00 €
+Kuhano vino	0,20l 	  	2,00 €
+Med 	  	  	0,40 €
+Vroča čokolada 	  	  	1,60 €
+Vroča čokolada s smetano 	  	  	1,80 €
+Smetana - porcija	  	  	0,30 €
+Laško, steklenica	0,5l 	  	2,20 €
+Union, steklenica	0,5l 	  	2,20 €
+Uni	0,5l 	  	2,00 €
+Heineken	0,33l 	  	2,50 €
+Kovaško pivo, točeno	0,5l 	  	2,00 €
+Kovaško pivo, točeno	0,30l 	  	1,80 €
+Kovaško pivo, točeno	0,2l 	  	1,60 €
+Radler, steklenica	0,5l 	  	2,20 €
+Union, steklenica	0,33l 	  	2,10 €
+Malt, steklenica	0,33l 	  	2,00 €
