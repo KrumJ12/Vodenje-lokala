@@ -1,0 +1,114 @@
+Radenska	1.60
+Schweppes Bitter Lemon	2.10
+Schweppes Tangerine	2.10
+Schweppes Tonic	2.10
+Coca-cola	2.10
+Fanta	2.10
+Cockta	2.10 
+Nestea ledeni čaj 	2.10 
+Jabolčni sok	1.00 
+Juice	1.00 
+Sokovi Fructal 2.10 
+Red Bull	3.00 
+Voda	2.00 
+Vode z okusom	2.00 
+Multi sola	2.00 
+Orangina	2.00 
+Cedevita	1.50 
+Naravna limonada	2.50 
+Naravni sok pomaranče	1.40 
+kava	1.20 
+kava z mlekom	1.30 
+kava s smetano	1.30 
+cappuccino	1.30 
+macchiato	1.30 
+latte macchiato	2.00 
+bela kava	1.60 
+brezkofeinska kava	1.40 
+brezkofeinska kava z mlekom	1.50 
+brezkofeinska kava s smetano	1.50 
+brezkofeinski cappuccino	1.50 
+brezkofeinska bela kava	1.80 
+vroča čokolada	2.00 
+vroča čokolada z okusom	2.20 
+kakav	1.70 
+čaj	1.40 
+čaj z limono	1.50 
+čaj z mlekom	1.50 
+čaj z medom	1.70 
+Kuhano vino belo	2.20 
+Kuhano vino rdeče	2.20 
+črni čaji	2.10 
+zeleni čaji	2.10 
+sadni čaji	2.10 
+zeliščni čaji	2.10 
+borovničevec	2.20 
+pelinkovec	2.00 
+viljamovka	2.50 
+sadjevec	2.20 
+brinjevec	2.20 
+rum	2.00 
+travarica	2.20 
+vodka	2.20 
+Cynar	2.40 
+gin Bombay	3.50 
+gin Hendrick’s	3.60 
+Stock	2.20 
+Jagermaister	3.00 
+Underberg	3.50 
+Campari	2.60 
+Canadian Club	2.80 
+Ballantine’s	2.80 
+Jack Daniel’s	3.00 
+Bacardi	2.50 
+Hennessy VS	3.50 
+Bailey’s	2.50 
+Jameson	3.20 
+Chivas 12yo	3.80 
+SouthernHComfort	3.50 
+Laphroaig 10yo	4.00 
+Točeno Bernard svetlo/temno	2.20 
+Točeno Bernard svetlo/temno veliko	2.60 
+Točeno Bevog Tak	3.00 
+Točeno Bevog Tak veliko	4.00 
+London pride	3.40 
+London porter		3.50 
+ESB		3.50 
+Organic honey dew	3.60 
+Indi pale ale	3.50 
+Golden pride	4.40 
+Double chocolate stout	3.60 
+Ghost ship		3.50 
+Bengal lancer	4.20 
+Big job		4.50 
+Proper job		4.50 
+Citra	4.50 
+Green Devil		4.50 
+Bevog Kramah		3.50 
+Bevog Baja	3.20 
+Bevog Deetz		3.20 
+Bevog Rudeen		4.20 
+Bevog Who cares		3.70 
+O’hara’s Irish pale ale		4.40 
+O’hara’s Irish red		4.40 
+O’hara’s Irish stout		4.40 
+O’hara’s Amber Adventure		4.40 
+O’hara’s Double IPA	5.10 
+O’hara’s Leann Follain		4.40 
+O’hara’s Curim		4.40 
+Liefmans Fruitesse		3.50 
+Chimay red		3.80 
+Karameliet tripel		3.90 
+La chouffe		4.20 
+Mc chouffe		4.30 
+Delirium Tremens		5.30 
+Duvel		4.10 
+Kwak		3.80 
+Rochefort 10	5.30 
+Kasteel rouge		4.20 
+Sierra nevada	3.40 
+Weihenstephaner Tradition		3.70 
+Weihenstephaner Heffeweissbier	3.70 
+Weihenstephaner Vitus		3.80 
+Benediktiner		3.60 
+Augustiner Edelstoff	3.70 
