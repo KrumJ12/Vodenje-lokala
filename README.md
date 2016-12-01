@@ -24,4 +24,4 @@ Uporabnik bi lahko izbral ustrezno »tabelo« oziroma kategorijo, ki ga zanima, 
 Imel bi npr. gumbe za vnos oziroma popravek količine pijače/hrane v shrambi. S klikom na ustrezno mesto v tabeli, bi lahko popravil vnos (npr. podatke o zaposlenih, seveda pa ne znesek računa).
 Če bi želeli iz ponudbe umakniti določeno pijačo, bi za to poskrbel drug gumb, ipd…
 
-![alt text](VNESI NOV DIAGRAM "ER Diagram")
+![alt text](https://raw.githubusercontent.com/KrumJ12/Vodenje-lokala/master/Diagram.png "ER Diagram")
