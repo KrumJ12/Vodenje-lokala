@@ -47,8 +47,14 @@ for zaposlen in range(n):
     datumRojstva += str(letoRojstva)
     mesecRojstva = random.randint(1,12)
     danRojstva = random.randint(1,28)
-    datumRojstva +="/"+str(mesecRojstva)
-    datumRojstva +="/"+str(danRojstva)
+    if mesecRojstva < 10:
+        datumRojstva +="-0"+str(mesecRojstva)
+    else:
+        datumRojstva +="-"+str(mesecRojstva)
+    if danRojstva < 10:
+        datumRojstva +="-0"+str(danRojstva)
+    else:
+        datumRojstva +="-"+str(danRojstva)
 
     # datum zaposlitve
     datum = ""
@@ -56,8 +62,15 @@ for zaposlen in range(n):
     mesec = random.randint(1,12)
     dan = random.randint(1,28)
     datum +=str(leto)
-    datum +="/"+str(mesec)
-    datum +="/"+str(dan)
+    if mesec < 10:
+        datum +="-0"+str(mesec)
+    else:
+        datum +="-"+str(mesec)
+    if dan < 10:
+        datum +="-0"+str(dan)
+    else:
+        datum +="-"+str(dan)
+    
     # telefon
     telefon = ""
     zac = ["030","031","041","040","051"]
@@ -74,7 +87,7 @@ for zaposlen in range(n):
     sezPriimkov.remove(priimek)
     # e-posta
     koncMail = ["gmail.com","hotmail.com","outlook.com","yahoo.com"]
-    email = ime+"."+priimek+"@"+random.choice(koncMail)
+    email = ime.lower()+"."+priimek.lower()+"@"+random.choice(koncMail)
     # ID
     st = zaposlen + 1
     # prebivalisce

@@ -29,7 +29,9 @@ for pogodba in range(n):
     # veljavnost
     leto = random.choice(['2015','2016','2017'])
     mesec = str(random.randint(1,12))
-    velja = leto + "/" + mesec
+    if int(mesec) < 10:
+        mesec = "0"+mesec
+    velja = leto + "-" + mesec
 
     # ime
     ime = 'KAVA'

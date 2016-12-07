@@ -14,7 +14,7 @@ for vrstica in open('pijaca.txt',encoding='utf-8'):
         ind = ind + 1
     cena = sez[-1]
     stavek = 'INSERT INTO izdelki (id,ime,zaloga,tip,cena) VALUES (?, ?, ?, ?, ?)'
-    c.execute(stavek, (st, ime, 0, "pijaca", cena))
+    c.execute(stavek, (st, ime.rstrip(), 0, "pijaca", cena))
     st +=1
 
 conn.commit()
