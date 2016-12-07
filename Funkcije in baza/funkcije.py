@@ -49,13 +49,32 @@ def seznamDobaviteljev():
         dob.append(dobavitelj)
     return dob
 
+def vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost):
+    # id se dodeli sam AUTO INCREMENT
+    # tip je "hrana","pijača","ostalo"
+    # veljavnost do vključno "LETO-MESEC"
+    if veljavnost[4] != "-":
+        raise Exception('Datum pogodbe je neveljaven')
+    stavek = 'INSERT INTO pogodba (id_dobavitelja,tip,veljavnost,ime) VALUES (?,?,?,?)'
+    p.execute(stavek, (id_dobavitelja,tip,veljavnost,ime))
+    povezava.commit()
+
+def vnesiDobavitelja(naziv,naslov,telefon,e_posta,davcna_stevilka,trr):
+    #naziv npr. Naziv s.p.
+    # telefon xxx xxx xxx
+    # davcna 8 mestna
+    # trr SI56 xxxx xxxx xxxx xxx
+    if not "@" in e_posta:
+        raise Exception('Nepravilen zapis e-pošte')
+    if len(str(davcna_stevilka)) != 8:
+        raise Exception('Nepravilna davčna številka')
+    if len(trr) != 23:
+        raise Exception('Nepravilen TRR')
+    stavek = 'INSERT INTO dobavitelji (naziv,naslov,telefon,e_posta,davcna_stevilka,trr) VALUES (?,?,?,?,?,?)'
+    p.execute(stavek, (naziv,naslov,telefon,e_posta,davcna_stevilka,trr))
+    povezava.commit()
+    
 def vnesiRacun():
-    pass
-
-def vnesiPogodbo():
-    pass
-
-def vnesiDobavitelja():
     pass
 
 def vnesiIzdelek():
