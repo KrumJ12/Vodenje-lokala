@@ -113,4 +113,24 @@ def vnesiAkcijo(izdelek_ime, zacetek, konec, vrednost):
     p.execute(stavek,(id_izdelka, zacetek, konec, vrednost))
     povezava.commit()
     
+
+def vrniZaposlenega(mesto):
+    '''vnesi številko od 1 do 5. 1--> šef, 2--> vodja izmene, 3--> kuhar, 4--> natakar
+5--> ostalo osebje'''
+    sez=[]
+    stavek= 'SELECT ime, priimek FROM zaposleni WHERE funkcija = ?'
+    p.execute(stavek, (str(mesto)))
+    for zaposlen in p.fetchall():
+        sez.append(zaposlen)
+    povezava.commit()
+    return sez
+
+def spremeniCeno(ime_izdelka,nova_cena):
+    '''danemu izdelku bomo spremenili ceno'''
+    if ime_izdelka in seznamIzdelkov():
+        stavek = 'UPDATE izdelki SET cena= ? WHERE ime=?'
+        p.execute(stavek, (nova_cena, ime_izdelka))
+    else:
+        raise Exception ('Izdeleka še ni v tabeli')
+    povezava.commit()
     
