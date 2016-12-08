@@ -1,6 +1,6 @@
 import sqlite3
 import time
-from datetime import date
+from datetime import date, time, datetime
 povezava = sqlite3.connect('lokal.db')
 p = povezava.cursor()
 
@@ -81,7 +81,30 @@ def vnesiDobavitelja(naziv,naslov,telefon,e_posta,davcna_stevilka,trr):
     p.execute(stavek, (naziv,naslov,telefon,e_posta,davcna_stevilka,trr))
     povezava.commit()
     
-def vnesiRacun():
+def vnesiRacun(id_natakarja,znesek,nacin_placila):
+    # znesek je potrebno izračunati s funkcijo izracunajZnesek
+    # cas_nakupa bo ob vnosu računa
+    # način plačila je niz 'gotovina','kartica','dobavnica'
+
+    #cas nakupa ob vnosu racuna
+    dt = datetime.now()
+    tt = dt.timetuple()
+    sezCasNakupa = []
+    i = 0
+    while i < 5:
+        sezCasNakupa.append(str(tt[i]))
+        i+=1
+    for i in range(1,5):
+        if len(sezCasNakupa[i]) <2:
+            sezCasNakupa[i] = "0"+sezCasNakupa[i]
+    tt = sezCasNakupa
+    cas_nakupa = tt[0]+"-"+tt[1]+"-"+tt[2]+" "+tt[3]+":"+tt[4]
+
+    #id natakarja
+
+    # znesek
+
+def izracunajZnesek():
     pass
 
 def vnesiIzdelek(ime,zaloga,tip='/',cena = 0):
@@ -112,6 +135,8 @@ def vnesiAkcijo(izdelek_ime, zacetek, konec, vrednost):
     stavek = 'INSERT INTO akcija (izdelek, zacetek_akcije,konec_akcije,vrednost) VALUES (?,?,?,?)'
     p.execute(stavek,(id_izdelka, zacetek, konec, vrednost))
     povezava.commit()
+
+    
     
 
 def vrniZaposlenega(mesto):
