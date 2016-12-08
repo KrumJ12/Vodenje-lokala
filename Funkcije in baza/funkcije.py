@@ -100,6 +100,14 @@ def vnesiAkcijo(izdelek_ime, zacetek, konec, vrednost):
     #vrednost akcije je med 0 in 100
     #vneseš ime izdelka
     sez_imen=seznamIzdelkov()
+    if izdelek_ime not in sez_imen:
+        raise Exception('Izdelka ni v bazi')
+    if zacetek[4] != '-' or zacetek[7] !='-':
+        raise Exception('Napačen čas začetka akcije')
+    if konec[4] != '-' or konec[7] !='-':
+        raise Exception('Napačen čas konca akcije')
+    if 0<=vrednost<=100:
+        raise Exception('Napačna vrednost akcije')
     id_izdelka=seznamIzdelkov_id()[sez_imen.index(izdelek_ime)]
     stavek = 'INSERT INTO akcija (izdelek, zacetek_akcije,konec_akcije,vrednost) VALUES (?,?,?,?)'
     p.execute(stavek,(id_izdelka, zacetek, konec, vrednost))
