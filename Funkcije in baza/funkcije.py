@@ -77,5 +77,14 @@ def vnesiDobavitelja(naziv,naslov,telefon,e_posta,davcna_stevilka,trr):
 def vnesiRacun():
     pass
 
-def vnesiIzdelek():
-    pass
+def vnesiIzdelek(ime,zaloga,tip='/',cena = 0):
+    if ime in seznamIzdelkov():
+        stavek = 'UPDATE izdelki SET zaloga = zaloga + ? WHERE ime = ?'
+        p.execute(stavek,(zaloga,ime))
+    else:
+        if tip == '/' or cena == 0:
+            raise Exception('Gre za nov izdelek! Vnesi tip izdelka in/ali ceno!')
+        stavek = 'INSERT INTO izdelki (ime,zaloga,tip,cena) VALUES (?,?,?,?)'
+        p.execute(stavek,(ime,zaloga,tip,cena))
+    povezava.commit()
+    
