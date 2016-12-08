@@ -35,6 +35,13 @@ def seznamIzdelkov():
         izdelki.append(izdelek[0])
     return izdelki
 
+def seznamIzdelkov_id():
+    izdelki=[]
+    p.execute('SELECT id FROM izdelki')
+    for izdelek in p.fetchall():
+        izdelki.append(izdelek[0])
+    return izdelki
+
 def seznamPogodb():
     pogodbe = []
     p.execute('SELECT ime,tip,veljavnost FROM pogodba')
@@ -87,4 +94,15 @@ def vnesiIzdelek(ime,zaloga,tip='/',cena = 0):
         stavek = 'INSERT INTO izdelki (ime,zaloga,tip,cena) VALUES (?,?,?,?)'
         p.execute(stavek,(ime,zaloga,tip,cena))
     povezava.commit()
+
+def vnesiAkcijo(izdelek_ime, zacetek, konec, vrednost):
+    #zacetek in konec akcije sta v obliki llll-mm-dd
+    #vrednost akcije je med 0 in 100
+    #vneseš ime izdelka
+    sez_imen=seznamIzdelkov()
+    id_izdelka=seznamIzdelkov_id()[sez_imen.index(izdelek_ime)]
+    stavek = 'INSERT INTO akcija (izdelek, zacetek_akcije,konec_akcije,vrednost) VALUES (?,?,?,?)'
+    p.execute(stavek,(id_izdelka, zacetek, konec, vrednost))
+    povezava.commit()
+    
     
