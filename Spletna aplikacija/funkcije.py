@@ -39,7 +39,7 @@ def tabelaIzdelkov():
     izdelki = []
     p.execute('SELECT * FROM izdelki')
     for izdelek in p.fetchall():
-        izdelki.append(izdelek[0])
+        izdelki.append(izdelek)
     return izdelki
 
 def seznamIzdelkov_id():
