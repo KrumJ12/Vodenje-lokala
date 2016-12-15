@@ -1,7 +1,11 @@
-from bottle import route, run, template
+from bottle import route, run, static_file
 
 @route('/')
-def index():
-    return 'Pozdravljeni na spletni strani'
+def hello():
+    return "Pozdravljeni na spletni strani"
 
-run(reloader=True,debug=True)
+@route('/<filename>')
+def server_static(filename):
+    return static_file(filename, root='')
+
+run(host='localhost', port=8080, debug=True)
