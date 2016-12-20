@@ -3,11 +3,12 @@ import time
 from datetime import date, time, datetime
 povezava = sqlite3.connect('lokal.db')
 p = povezava.cursor()
+povezava.row_factory = sqlite3.Row
 
 
 def seznamZaposlenih():
-    p.execute('SELECT ime,priimek FROM zaposleni')
-    return p.fetchall()
+    sql = '''SELECT ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,telefon,prebivalisce FROM zaposleni '''
+    return list(povezava.execute(sql))
 
 def vnesiZaposlenega(ime,priimek,datum_rojstva,e_posta,funkcija,telefon,prebivalisce):
     # id se dodeli sam (AUTO INCREMENT)
@@ -35,12 +36,10 @@ def seznamIzdelkov():
         izdelki.append(izdelek[0])
     return izdelki
 
+
 def tabelaIzdelkov():
-    izdelki = []
-    p.execute('SELECT * FROM izdelki')
-    for izdelek in p.fetchall():
-        izdelki.append(izdelek)
-    return izdelki
+    sql = '''SELECT ime,tip,cena FROM izdelki ORDER BY tip'''
+    return list(povezava.execute(sql))
 
 def seznamIzdelkov_id():
     izdelki=[]
@@ -57,11 +56,8 @@ def seznamPogodb():
     return pogodbe
 
 def seznamDobaviteljev():
-    dob = []
-    p.execute('SELECT naziv,davcna_stevilka FROM dobavitelji')
-    for dobavitelj in p.fetchall():
-        dob.append(dobavitelj)
-    return dob
+    sql = '''SELECT naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji'''
+    return list(povezava.execute(sql))
 
 def vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost):
     # id se dodeli sam AUTO INCREMENT

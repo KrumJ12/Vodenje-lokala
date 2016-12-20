@@ -22,12 +22,10 @@
 
     <thead>
       <tr>
-        <th>ID</th>
         <th>Ime</th>
         <th>Priimek</th>
         <th>Datum rojstva</th>
         <th>E-pošta</th>
-        <th>Funkcija</th>
         <th>Datum zaposlitve</th>
         <th>Telefon</th>
         <th>Prebivališče</th>
@@ -36,16 +34,20 @@
     </thead>
 
     <tbody>
+
+    % for zaposlen in seznam:
       <tr>
-        <td>1</td>
-        <td>Maša</td>
-        <td>Rupnik</td>
-        <td>1961-11-25</td>
-        <td>masa.rupnik@gmail.com</td>
-        <td>2</td>
-        <td>2016-09-04</td>
-        <td>040 428 855</td>
-        <td>Osojna steza 29</td>
+
+
+        <td>{{zaposlen['ime']}}</td>
+        <td>{{zaposlen['priimek']}}</td>
+        <td>{{zaposlen['datum_rojstva']}}</td>
+        <td>{{zaposlen['e_posta']}}</td>
+        <td>{{zaposlen['datum_zaposlitve']}}</td>
+        <td>{{zaposlen['telefon']}}</td>
+        <td>{{zaposlen['prebivalisce']}}</td>
+
+      %end
       </tr>
     </tbody>
   </table>

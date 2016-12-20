@@ -20,12 +20,12 @@ def izdelki():
 @route('/zaposleni')
 def zaposleni():
     return template(
-        'zaposleni')
+        'zaposleni',seznam = modeli.seznamZaposlenih())
 
 @route('/dobavitelji')
 def dobavitelji():
     return template(
-        'dobavitelji')
+        'dobavitelji',seznam = modeli.seznamDobaviteljev())
 
 @route('/racun')
 def racun():
