@@ -17,22 +17,22 @@
 
 
 
-<form>
+<form action="/preberi" method="post">
   <div class="form-group">
-    <label for="exampleInputEmail1">Ime izdelka</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Vnesi ime izdelka">
+    <label for="ime">Ime izdelka</label>
+    <input type="text" class="form-control" id="ime" aria-describedby="emailHelp" placeholder="Vnesi ime izdelka">
   </div>
 
 
   <div class="form-group">
-    <label for="exampleInputEmail1">Zaloga</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Vnesi količino, npr: 30">
+    <label for="zaloga">Zaloga</label>
+    <input type="text" class="form-control" id="zaloga" aria-describedby="emailHelp" placeholder="Vnesi količino, npr: 30">
   </div>
 
 
   <div class="form-group">
-    <label for="exampleSelect1">Tip</label>
-    <select class="form-control" id="exampleSelect1">
+    <label for="tip">Tip</label>
+    <select class="form-control" id="tip">
       <option>Tip izdelka ni izbran</option>
       <option>Topli napitek</option>
       <option>Brezalkoholna pijača</option>
@@ -43,8 +43,8 @@
   </div>
 
   <div class="form-group">
-    <label for="exampleInputEmail1">Cena</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Vnesi ceno npr: 1.8">
+    <label for="cena">Cena</label>
+    <input type="text" class="form-control" id="cena" aria-describedby="emailHelp" placeholder="Vnesi ceno npr: 1.8">
   </div>
 
 
