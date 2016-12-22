@@ -15,21 +15,18 @@ def tabela():
 
 @route('/izdelki')
 def izdelki():
-    return template(
-        'izdelki')
+    return template('izdelki',imena=modeli.seznamImenovIzdelkov())
 
 @route('/pogodbe')
 def pogodbe():
     return template(
-        'pogodbe',seznam=modeli.seznamPogodb(),imena=modeli.imenaDobaviteljev())
+        'pogodbe',seznam=modeli.seznamPogodb())
 @post('/pogodbe')
 def dodaj_pogodbo():
     ime=request.forms.ime
     tip=request.forms.tip
     veljavnost=request.forms.veljavnost
-    # pretvori iz Imena v ID
     id_dobavitelja=request.forms.id_dobavitelja
-    id_dobavitelja = modeli.vrniIDDobavitelja(id_dobavitelja)
     modeli.vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost)
     redirect('/pogodbe')
     
@@ -77,10 +74,6 @@ def dodaj_dobavitelja():
 def racun():
     return template(
         'racun',seznam = modeli.izdaniRacuni())
-
-@get('/izdelki')
-def forma():
-    return template('izdelki')
 
 @post('/izdelki')
 def preberi():

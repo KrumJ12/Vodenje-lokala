@@ -163,6 +163,16 @@ def vrniZaposlenega(mesto):
     povezava.commit()
     return sez
 
+def seznamImenovIzdelkov():
+##    sql='SELECT ime FROM izdelki'
+##    s=[]
+##    p.execute(sql)
+##    for ime in p.fetchall():
+##        s.append(ime[0])
+##    return s
+    sql='''SELECT ime FROM izdelki'''
+    return list(povezava.execute(sql))
+
 def spremeniCeno(ime_izdelka,nova_cena):
     '''danemu izdelku bomo spremenili ceno'''
     if ime_izdelka in seznamIzdelkov():
