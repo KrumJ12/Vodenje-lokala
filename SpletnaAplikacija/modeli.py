@@ -7,7 +7,7 @@ povezava.row_factory = sqlite3.Row
 
 
 def seznamZaposlenih():
-    sql = '''SELECT ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,telefon,prebivalisce FROM zaposleni '''
+    sql = '''SELECT ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,telefon,prebivalisce FROM zaposleni  ORDER BY datum_zaposlitve DESC'''
     return list(povezava.execute(sql))
 
 def izdaniRacuni():
@@ -43,7 +43,7 @@ def seznamIzdelkov():
 
 
 def tabelaIzdelkov():
-    sql = '''SELECT ime,tip,cena FROM izdelki ORDER BY tip'''
+    sql = '''SELECT ime,tip,cena FROM izdelki ORDER BY ime'''
     return list(povezava.execute(sql))
 
 def seznamIzdelkov_id():
@@ -164,13 +164,7 @@ def vrniZaposlenega(mesto):
     return sez
 
 def seznamImenovIzdelkov():
-##    sql='SELECT ime FROM izdelki'
-##    s=[]
-##    p.execute(sql)
-##    for ime in p.fetchall():
-##        s.append(ime[0])
-##    return s
-    sql='''SELECT ime FROM izdelki'''
+    sql='''SELECT ime FROM izdelki ORDER BY ime ASC'''
     return list(povezava.execute(sql))
 
 def spremeniCeno(ime_izdelka,nova_cena):

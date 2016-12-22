@@ -16,11 +16,11 @@ def tabela():
 @route('/izdelki')
 def izdelki():
     return template('izdelki',imena=modeli.seznamImenovIzdelkov())
+
 @post('/spremeniCeno')
 def spremeniCeno():
     ime=request.forms.izdelek
     cena=float(request.forms.cena)
-    print(ime)
     modeli.spremeniCeno(ime,cena)
     redirect('/izdelki')
 
@@ -35,6 +35,7 @@ def dodaj_Zalogo():
 def pogodbe():
     return template(
         'pogodbe',seznam=modeli.seznamPogodb(),imena=modeli.imenaDobaviteljev())
+
 @post('/pogodbe')
 def dodaj_pogodbo():
     ime=request.forms.ime
@@ -63,8 +64,6 @@ def zaposleni():
     funkcija = sez.index(funkcija)+1
     tel = request.forms.telefon
     prebivalisce = request.forms.prebivalisce
-
-    
     modeli.vnesiZaposlenega(ime,priimek,datum_rojstva,eposta,funkcija,tel,prebivalisce)
     redirect('/zaposleni')
 
