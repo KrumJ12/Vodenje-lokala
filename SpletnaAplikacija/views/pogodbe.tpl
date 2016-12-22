@@ -6,7 +6,7 @@
       <h4>Operacije</h4>
       <ul class="nav nav-pills nav-stacked">
 
-        <li><a href="#section2">Dodaj pogodbo</a></li>
+        <li><a href="javascript:showhide('uniquename')">Dodaj pogodbo</a></li>
 
       </ul><br>
 
@@ -14,7 +14,7 @@
 
     <div class="col-sm-9">
 
-<form method="post">
+<form method="post" id="uniquename" style="display:none;">
   <div class="form-group">
     <label for="ime">Ime pogodbe</label>
     <input type="text" class="form-control" id="ime" name="ime" aria-describedby="emailHelp" placeholder="Vnesi ime pogodbe">

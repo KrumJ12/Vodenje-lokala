@@ -24,6 +24,13 @@
       padding: 25px;
     }
   </style>
+  
+  <script type="text/javascript">
+ function showhide(id) {
+    var e = document.getElementById(id);
+    e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+ }
+</script>
 </head>
 </head>
 
