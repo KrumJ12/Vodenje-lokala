@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from bottle import route, run, template, request, get, post, redirect
 import modeli
 
@@ -39,7 +42,7 @@ def racun():
 
 @get('/izdelki')
 def forma():
-    return template('izdelki.tpl')
+    return template('izdelki')
 
 
 
