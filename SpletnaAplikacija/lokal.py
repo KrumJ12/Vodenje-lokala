@@ -38,20 +38,16 @@ def racun():
     return template(
         'racun',seznam = modeli.izdaniRacuni())
 
-
-
 @get('/izdelki')
 def forma():
     return template('izdelki')
 
-
-
 @post('/izdelki')
 def preberi():
-    ime = request.forms.get('ime')
-    zaloga  = int(request.forms.get('zaloga'))
-    tip = request.forms.get('tip')
-    cena  = float(request.forms.get('cena'))
+    ime = request.forms.ime
+    zaloga  = int(request.forms.zaloga)
+    tip = request.forms.tip
+    cena  = float(request.forms.cena)
     if 'Tip' in tip:
         tip = '/'
     modeli.vnesiIzdelek(ime,zaloga,tip,cena)
