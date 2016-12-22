@@ -14,9 +14,61 @@
 
     <div class="col-sm-9">
 
+      <form method="post">
+  <div class="form-group">
+    <label for="ime">Ime</label>
+    <input type="text" class="form-control" id="ime" name="ime" aria-describedby="emailHelp" placeholder="Vnesi ime zaposlenega">
+  </div>
+
+    <div class="form-group">
+    <label for="priimek">Priimek</label>
+    <input type="text" class="form-control" id="priimek" name="priimek" aria-describedby="emailHelp" placeholder="Vnesi priimek zaposlenega">
+  </div>
+
+
+    <div class="form-group">
+    <label for="datum_rojstva">Datum rojstva</label>
+    <input type="text" class="form-control" id="datum_rojstva" name="datum_rojstva" aria-describedby="emailHelp" placeholder="Vnesi datum rojstva oblike LLLL-MM-DD">
+  </div>
+
+  <div class="form-group">
+    <label for="eposta">E-pošta</label>
+    <input type="text" class="form-control" name = "eposta" id="eposta" aria-describedby="emailHelp" placeholder="Vnesi elektronski naslov">
+  </div>
+
+    <div class="form-group">
+    <label for="funkcija">Funkcija</label>
+    <select class="form-control" id="funkcija" name="funkcija">
+      <option>Šef</option>
+      <option>Vodja izmene</option>
+      <option>Kuhar</option>
+      <option>Natakar</option>
+      <option>Ostalo osebje</option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label for="telefon">Telefon</label>
+    <input type="text" class="form-control" name = "telefon" id="telefon" aria-describedby="emailHelp" placeholder="Vnesi telefonsko številko oblike  040 400 800">
+  </div>
+
+  <div class="form-group">
+    <label for="prebivalisce">Prebivališče</label>
+    <input type="text" class="form-control" name = "prebivalisce" id="prebivalisce" aria-describedby="emailHelp" placeholder="Vnesi prebivališče">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Potrdi</button>
+
+
+
+</form>
+</div>
+
 
 
 <div class="container">
+
   <h2>Seznam zaposlenih</h2>         
   <table class="table">
 
@@ -51,4 +103,5 @@
       </tr>
     </tbody>
   </table>
-</div>
+
+  </div>

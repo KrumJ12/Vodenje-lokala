@@ -31,7 +31,7 @@ def vnesiZaposlenega(ime,priimek,datum_rojstva,e_posta,funkcija,telefon,prebival
     danes = date.today()
     datum_zaposlitve = danes.isoformat()
     stavek = 'INSERT INTO zaposleni (ime,priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce) VALUES (?,?,?,?,?,?,?,?)'
-    p.execute(stavek, (ime,priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce))
+    povezava.execute(stavek, (ime,priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce))
     povezava.commit()
 
 def seznamIzdelkov():
