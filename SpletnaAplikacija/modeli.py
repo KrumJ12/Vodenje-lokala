@@ -61,6 +61,14 @@ def seznamDobaviteljev():
     sql = '''SELECT naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji'''
     return list(povezava.execute(sql))
 
+def imenaDobaviteljev():
+    sql = '''SELECT naziv FROM dobavitelji'''
+    return list(povezava.execute(sql))
+
+def vrniIDDobavitelja(naziv):
+    sql = '''SELECT id FROM dobavitelji WHERE naziv = ?'''
+    return list(p.execute(sql,[naziv]))[0][0]
+
 def vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost):
     # id se dodeli sam AUTO INCREMENT
     # tip je "hrana","pijača","ostalo"

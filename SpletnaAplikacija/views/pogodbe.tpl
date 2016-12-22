@@ -33,15 +33,21 @@
     </select>
   </div>
 
-    <div class="form-group">
-    <label for="id_dobavitelja">dobavitelj</label>
-    <input type="text" class="form-control" id="id_dobavitelja" name="id_dobavitelja" aria-describedby="emailHelp" placeholder="Izberi dobavitelja "treba spremenit!"">
+  <div class="form-group">
+    <label for="tip">Dobavitelj</label>
+    <select class="form-control" id="tip" name="id_dobavitelja">
+      <option>Naziv dobavitelja ni izbran</option>
+% for ime in imena:
+<option>{{ime['naziv']}}</option>
+% end
+
+    </select>
   </div>
 
 
   <div class="form-group">
-    <label for="veljavnost">veljavnost</label>
-    <input type="text" class="form-control" name = "veljavnost" id="veljavnost" aria-describedby="emailHelp" placeholder="Veljavnost v obliki leto- mesec(2015-09)">
+    <label for="veljavnost">Veljavnost</label>
+    <input type="text" class="form-control" name = "veljavnost" id="veljavnost" aria-describedby="emailHelp" placeholder="Veljavnost v obliki LLLL-MM">
   </div>
 
 
