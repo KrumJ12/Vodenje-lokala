@@ -24,6 +24,13 @@ def spremeniCeno():
     modeli.spremeniCeno(ime,cena)
     redirect('/izdelki')
 
+@post('/dodajZalogo')
+def dodaj_Zalogo():
+    ime=request.forms.izdelek
+    zaloga=int(request.forms.zaloga)
+    modeli.dodajZalogo(ime,zaloga)
+    redirect('/izdelki')
+
 @route('/pogodbe')
 def pogodbe():
     return template(

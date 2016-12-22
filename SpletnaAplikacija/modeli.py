@@ -181,4 +181,14 @@ def spremeniCeno(ime_izdelka,nova_cena):
     else:
         raise Exception ('Izdeleka še ni v tabeli')
     povezava.commit()
+
+def dodajZalogo(ime, kolicina):
+    #dobiti je treba, koliko je izdelkov sedaj
+    #in prišteti novo
+    stavek='UPDATE izdelki SET zaloga= zaloga + ? WHERE ime=?'
+    p.execute(stavek, (kolicina, ime))
+    povezava.commit()
+    
+    
+    
     
