@@ -33,6 +33,11 @@
     </select>
   </div>
 
+    <div class="form-group">
+    <label for="id_dobavitelja">dobavitelj</label>
+    <input type="text" class="form-control" id="id_dobavitelja" name="id_dobavitelja" aria-describedby="emailHelp" placeholder="Izberi dobavitelja "treba spremenit!"">
+  </div>
+
 
   <div class="form-group">
     <label for="veljavnost">veljavnost</label>
@@ -56,6 +61,7 @@
         <th>ime</th>
         <th>tip</th>
         <th>veljavnost</th>
+		<th>id_dobavitelja</th>
         <th>id</th>
 
       </tr>
@@ -70,6 +76,7 @@
         <td>{{pogodba['ime']}}</td>
         <td>{{pogodba['tip']}}</td>
         <td>{{pogodba['veljavnost']}}</td>
+		<td>{{pogodba['id_dobavitelja']}}</td>
         <td>{{pogodba['id']}}</td>
         
 

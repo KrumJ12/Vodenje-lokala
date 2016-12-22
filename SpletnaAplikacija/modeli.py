@@ -54,7 +54,7 @@ def seznamIzdelkov_id():
     return izdelki
 
 def seznamPogodb():
-    sql = '''SELECT ime,tip,veljavnost,id FROM pogodba'''
+    sql = '''SELECT ime,tip,veljavnost,id_dobavitelja,id FROM pogodba'''
     return list(povezava.execute(sql))
 
 def seznamDobaviteljev():

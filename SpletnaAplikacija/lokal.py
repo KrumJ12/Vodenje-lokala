@@ -22,6 +22,15 @@ def izdelki():
 def pogodbe():
     return template(
         'pogodbe',seznam=modeli.seznamPogodb())
+@post('/pogodbe')
+def dodaj_pogodbo():
+    ime=request.forms.ime
+    tip=request.forms.tip
+    veljavnost=request.forms.veljavnost
+    id_dobavitelja=request.forms.id_dobavitelja
+    modeli.vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost)
+    redirect('/pogodbe')
+    
 
 @route('/zaposleni')
 def zaposleni():
@@ -64,6 +73,7 @@ def preberi():
     zaloga  = int(request.forms.zaloga)
     tip = request.forms.tip
     cena  = float(request.forms.cena)
+    
     if 'Tip' in tip:
         tip = '/'
     modeli.vnesiIzdelek(ime,zaloga,tip,cena)
