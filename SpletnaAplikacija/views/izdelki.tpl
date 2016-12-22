@@ -56,7 +56,7 @@
 </div>
 
  <div class="col-sm-9">
-<form method="post" id="uniquename2" style="display:none;">
+<form action="/spremeniCeno" method="post" id="uniquename2" style="display:none;">
 
   <div class="form-group">
     <label for="izdelek">Izdelek</label>

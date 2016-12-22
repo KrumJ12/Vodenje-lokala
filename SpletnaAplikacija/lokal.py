@@ -16,6 +16,13 @@ def tabela():
 @route('/izdelki')
 def izdelki():
     return template('izdelki',imena=modeli.seznamImenovIzdelkov())
+@post('/spremeniCeno')
+def spremeniCeno():
+    ime=request.forms.izdelek
+    cena=float(request.forms.cena)
+    print(ime)
+    modeli.spremeniCeno(ime,cena)
+    redirect('/izdelki')
 
 @route('/pogodbe')
 def pogodbe():
