@@ -14,8 +14,39 @@
 
     <div class="col-sm-9">
 
+<form method="post">
+  <div class="form-group">
+    <label for="ime">Ime pogodbe</label>
+    <input type="text" class="form-control" id="ime" name="ime" aria-describedby="emailHelp" placeholder="Vnesi ime pogodbe">
+  </div>
 
 
+  <div class="form-group">
+    <label for="tip">Tip</label>
+    <select class="form-control" id="tip" name="tip">
+      <option>Tip izdelka ni izbran</option>
+      <option>topli napitki</option>
+      <option>brezalkoholno</option>
+      <option>alkoholno</option>
+      <option>hrana</option>
+      <option>tobak in ostalo</option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label for="veljavnost">veljavnost</label>
+    <input type="text" class="form-control" name = "veljavnost" id="veljavnost" aria-describedby="emailHelp" placeholder="Veljavnost v obliki leto- mesec(2015-09)">
+  </div>
+
+
+  <button type="submit" class="btn btn-primary">Potrdi</button>
+
+
+
+</form>
+
+	
 <div class="container">
   <h2>Seznam pogodb</h2>         
   <table class="table">
