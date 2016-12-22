@@ -54,11 +54,8 @@ def seznamIzdelkov_id():
     return izdelki
 
 def seznamPogodb():
-    pogodbe = []
-    p.execute('SELECT ime,tip,veljavnost FROM pogodba')
-    for pogodba in p.fetchall():
-        pogodbe.append(pogodba)
-    return pogodbe
+    sql = '''SELECT ime,tip,veljavnost,id FROM pogodba'''
+    return list(povezava.execute(sql))
 
 def seznamDobaviteljev():
     sql = '''SELECT naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji'''

@@ -21,7 +21,7 @@ def izdelki():
 @route('/pogodbe')
 def pogodbe():
     return template(
-        'pogodbe')
+        'pogodbe',seznam=modeli.seznamPogodb())
 
 @route('/zaposleni')
 def zaposleni():
@@ -57,6 +57,9 @@ def preberi():
     modeli.vnesiIzdelek(ime,zaloga,tip,cena)
     
     redirect('/izdelki')
-    
+
+
 
 run(debug=True)
+
+
