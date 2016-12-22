@@ -1,6 +1,5 @@
-from bottle import route, run, template
+from bottle import route, run, template, request, get, post, redirect
 import modeli
-import cgi, cgitb
 
 @route('/')
 def domov():
@@ -36,19 +35,23 @@ def racun():
     return template(
         'racun',seznam = modeli.izdaniRacuni())
 
-@route('/preberi')
-def preberi():
-    # Create instance of FieldStorage 
-    form = cgi.FieldStorage() 
 
-    # Get data from fields
-    ime = form.getvalue('ime')
-    zaloga  = form.getvalue('zaloga')
-    tip = form.getvalue('tip')
-    cena  = form.getvalue('cena')
+
+@get('/izdelki')
+def forma():
+    return template('izdelki.tpl')
+
+
+
+@post('/izdelki')
+def preberi():
+    ime = request.forms.get('ime')
+    zaloga  = request.forms.get('zaloga')
+    tip = request.forms.get('tip')
+    cena  = request.forms.get('cena')
 
     print(ime,zaloga,tip,cena)
-    
+    redirect('/izdelki')
     
 
 run(debug=True)

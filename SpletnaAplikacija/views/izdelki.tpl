@@ -17,16 +17,16 @@
 
 
 
-<form action="/preberi" method="post">
+<form method="post">
   <div class="form-group">
     <label for="ime">Ime izdelka</label>
-    <input type="text" class="form-control" id="ime" aria-describedby="emailHelp" placeholder="Vnesi ime izdelka">
+    <input type="text" class="form-control" id="ime" name="ime" aria-describedby="emailHelp" placeholder="Vnesi ime izdelka">
   </div>
 
 
   <div class="form-group">
     <label for="zaloga">Zaloga</label>
-    <input type="text" class="form-control" id="zaloga" aria-describedby="emailHelp" placeholder="Vnesi količino, npr: 30">
+    <input type="text" class="form-control" name = "zaloga" id="zaloga" aria-describedby="emailHelp" placeholder="Vnesi količino, npr: 30">
   </div>
 
 
@@ -44,7 +44,7 @@
 
   <div class="form-group">
     <label for="cena">Cena</label>
-    <input type="text" class="form-control" id="cena" aria-describedby="emailHelp" placeholder="Vnesi ceno npr: 1.8">
+    <input type="text" class="form-control" name = "cena" id="cena" aria-describedby="emailHelp" placeholder="Vnesi ceno npr: 1.8">
   </div>
 
 
