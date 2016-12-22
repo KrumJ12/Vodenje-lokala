@@ -20,13 +20,15 @@ def izdelki():
 @route('/pogodbe')
 def pogodbe():
     return template(
-        'pogodbe',seznam=modeli.seznamPogodb())
+        'pogodbe',seznam=modeli.seznamPogodb(),imena=modeli.imenaDobaviteljev())
 @post('/pogodbe')
 def dodaj_pogodbo():
     ime=request.forms.ime
     tip=request.forms.tip
     veljavnost=request.forms.veljavnost
+    # pretvori iz Imena v ID
     id_dobavitelja=request.forms.id_dobavitelja
+    id_dobavitelja = modeli.vrniIDDobavitelja(id_dobavitelja)
     modeli.vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost)
     redirect('/pogodbe')
     
