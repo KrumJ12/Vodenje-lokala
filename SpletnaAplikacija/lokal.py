@@ -37,6 +37,23 @@ def zaposleni():
     return template(
         'zaposleni',seznam = modeli.seznamZaposlenih())
 
+@post('/zaposleni')
+def zaposleni():
+    ime = request.forms.ime
+    priimek = request.forms.priimek
+    datum_rojstva = request.forms.datum_rojstva
+    eposta = request.forms.eposta
+    funkcija = request.forms.funkcija
+    sez = ['Šef','Vodja izmene','Kuhar','Natakar','Ostalo osebje']
+    funkcija = sez.index(funkcija)+1
+    tel = request.forms.telefon
+    prebivalisce = request.forms.prebivalisce
+
+    
+    modeli.vnesiZaposlenega(ime,priimek,datum_rojstva,eposta,funkcija,tel,prebivalisce)
+    redirect('/zaposleni')
+
+
 @route('/dobavitelji')
 def dobavitelji():
     return template(
