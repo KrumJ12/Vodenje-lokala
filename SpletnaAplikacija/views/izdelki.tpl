@@ -32,13 +32,13 @@
 
   <div class="form-group">
     <label for="tip">Tip</label>
-    <select class="form-control" id="tip">
+    <select class="form-control" id="tip" name="tip">
       <option>Tip izdelka ni izbran</option>
-      <option>Topli napitek</option>
-      <option>Brezalkoholna pijača</option>
-      <option>Alkoholna pijača</option>
-      <option>Hrana</option>
-      <option>Tobak in ostalo</option>
+      <option>topli napitki</option>
+      <option>brezalkoholno</option>
+      <option>alkoholno</option>
+      <option>hrana</option>
+      <option>tobak in ostalo</option>
     </select>
   </div>
 

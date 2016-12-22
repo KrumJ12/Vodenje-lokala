@@ -46,11 +46,13 @@ def forma():
 @post('/izdelki')
 def preberi():
     ime = request.forms.get('ime')
-    zaloga  = request.forms.get('zaloga')
+    zaloga  = int(request.forms.get('zaloga'))
     tip = request.forms.get('tip')
-    cena  = request.forms.get('cena')
-
-    print(ime,zaloga,tip,cena)
+    cena  = float(request.forms.get('cena'))
+    if 'Tip' in tip:
+        tip = '/'
+    modeli.vnesiIzdelek(ime,zaloga,tip,cena)
+    
     redirect('/izdelki')
     
 
