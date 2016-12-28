@@ -104,4 +104,34 @@
 
 
 </form>
+
+<div class="container">
+  <h2>Izdelki:</h2>         
+  <table class="table">
+
+    <thead>
+      <tr>
+        <th>Ime</th>
+        <th>Tip</th>
+        <th>Zaloga</th>
+        <th>Cena</th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+%for izdelek in izdelki:
+  <tr>
+  <td>{{izdelek['ime']}}</td>
+  <td>{{izdelek['tip']}}</td>
+  <td>{{izdelek['zaloga']}}</td>
+  <td>{{izdelek['cena']}} €</td>
+  </tr>
+%end
+
+    </tbody>
+  </table>
+</div>
+
   </div>

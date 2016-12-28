@@ -43,7 +43,12 @@ def seznamIzdelkov():
 
 
 def tabelaIzdelkov():
-    sql = '''SELECT ime,tip,cena FROM izdelki ORDER BY ime'''
+    sql = '''SELECT ime,tip,zaloga,cena FROM izdelki ORDER BY ime'''
+    return list(povezava.execute(sql))
+
+
+def imeInCenaIzdelkov():
+    sql = '''SELECT ime,cena FROM izdelki ORDER BY tip'''
     return list(povezava.execute(sql))
 
 def seznamIzdelkov_id():

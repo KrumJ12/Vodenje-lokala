@@ -7,15 +7,13 @@ import modeli
 @route('/')
 def domov():
     return template(
-        'domov')
+        'domov',imena=modeli.imeInCenaIzdelkov())
 
-@route('/tabela')
-def tabela():
-    return template("tabelaIzdelkov",izdelki = modeli.tabelaIzdelkov())
 
 @route('/izdelki')
 def izdelki():
-    return template('izdelki',imena=modeli.seznamImenovIzdelkov())
+    return template('izdelki',imena=modeli.seznamImenovIzdelkov(),
+                    izdelki = modeli.tabelaIzdelkov())
 
 @post('/spremeniCeno')
 def spremeniCeno():

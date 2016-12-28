@@ -50,7 +50,6 @@
 	      <ul class="nav navbar-nav">
 	        <li><a href="/">Domov</a></li>
 	        <li><a href="/izdelki">Izdelki</a></li>
-	        <li><a href="/tabela">Cenik</a></li>
 	        <li><a href="/racun">Računi</a></li>
 	        <li><a href="/zaposleni">Zaposleni</a></li>
 	        <li><a href="/dobavitelji">Dobavitelji</a></li>

@@ -1,41 +1,67 @@
 % rebase('osnova.tpl')
 
-<div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-danger btn-lg">1</a>
-  <a href="#" class="btn btn-default btn-lg">2</a>
-  <a href="#" class="btn btn-danger btn-lg">3</a>
-  <a href="#" class="btn btn-default btn-lg">4</a>
-  <a href="#" class="btn btn-danger btn-lg">5</a>
+<div class="row">
+
+<div class="col-xs-6">
+
+
+
+  <h1>Vnesi račun:</h1><hr>
+  <table id = "mojaT" class="table table-striped table-hover table-bordered">
+        <tbody>
+            <tr>
+                <th>Izdelek</th>
+                <th>Količina</th>
+                <th>Cena enega</th>
+                <th>Skupna cena</th>
+            </tr>
+
+
+            <tr>
+            <tr>
+                <th colspan="3"><span class="pull-right">Skupaj</span></th>
+                <th>končna cena €</th>
+            </tr>
+            <tr>
+                <td><a href="#" class="btn btn-primary">Izprazni</a></td>
+                <td colspan="3"><a href="#" class="pull-right btn btn-success">Potrdi nakup</a></td>
+            </tr>
+        </tbody>
+    </table>          
+      
 </div>
 
-<div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-default btn-lg">6</a>
-  <a href="#" class="btn btn-danger btn-lg">7</a>
-  <a href="#" class="btn btn-default btn-lg">8</a>
-  <a href="#" class="btn btn-danger btn-lg">9</a>
-  <a href="#" class="btn btn-default btn-lg">10</a>
-</div>
 
-<div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-danger btn-lg">11</a>
-  <a href="#" class="btn btn-default btn-lg">12</a>
-  <a href="#" class="btn btn-danger btn-lg">13</a>
-  <a href="#" class="btn btn-default btn-lg">14</a>
-  <a href="#" class="btn btn-danger btn-lg">15</a>
-</div>
 
-<div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-default btn-lg">16</a>
-  <a href="#" class="btn btn-danger btn-lg">17</a>
-  <a href="#" class="btn btn-default btn-lg">18</a>
-  <a href="#" class="btn btn-danger btn-lg">19</a>
-  <a href="#" class="btn btn-default btn-lg">20</a>
-</div>
 
-<div class="btn-group btn-group-justified">
-  <a href="#" class="btn btn-danger btn-lg">21</a>
-  <a href="#" class="btn btn-default btn-lg">22</a>
-  <a href="#" class="btn btn-danger btn-lg">23</a>
-  <a href="#" class="btn btn-default btn-lg">24</a>
-  <a href="#" class="btn btn-danger btn-lg">25</a>
+<script>
+function dodajVrstico(ime,cena) {
+    var table = document.getElementById("mojaT");
+    var row = table.insertRow(1);
+
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    cell1.innerHTML = ime;
+    cell2.innerHTML = "1x";
+    cell3.innerHTML = cena;
+    cell4.innerHTML = "skupna";
+}
+</script>
+
+
+
+  <div class="col-xs-6">
+    
+% for ime in imena:
+<a onclick="dodajVrstico(this.name,this.id)" id = {{ime['cena']}} name={{ime['ime']}} class="btn btn-default btn-sm">{{ime['ime']}}</a>
+% end
+
+
+  </div>
+
+
+
+
 </div>
