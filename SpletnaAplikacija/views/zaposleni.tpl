@@ -74,6 +74,7 @@
 
     <thead>
       <tr>
+      
         <th>Ime</th>
         <th>Priimek</th>
         <th>Datum rojstva</th>
@@ -81,7 +82,7 @@
         <th>Datum zaposlitve</th>
         <th>Telefon</th>
         <th>Prebivališče</th>
-
+        <th></th>
       </tr>
     </thead>
 
@@ -90,7 +91,6 @@
     % for zaposlen in seznam:
       <tr>
 
-
         <td>{{zaposlen['ime']}}</td>
         <td>{{zaposlen['priimek']}}</td>
         <td>{{zaposlen['datum_rojstva']}}</td>
@@ -98,6 +98,10 @@
         <td>{{zaposlen['datum_zaposlitve']}}</td>
         <td>{{zaposlen['telefon']}}</td>
         <td>{{zaposlen['prebivalisce']}}</td>
+        <td><a href="/oseba/{{zaposlen['id']}}/uredi">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </a>
+        </td>
 
       %end
       </tr>

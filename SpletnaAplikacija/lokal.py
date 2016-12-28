@@ -101,6 +101,27 @@ def preberi():
     
     redirect('/izdelki')
 
+@get('/oseba/<oseba>/uredi')
+def uredi_osebo(oseba):
+    return template(
+        'urediOsebo',
+        oseba=modeli.oseba(oseba)
+    )
+
+@post('/oseba/<oseba>/uredi')
+def uredi_osebo_submit(oseba):
+    oseba = request.forms.get('oseba')
+    ime = request.forms.get('ime')
+    priimek = request.forms.get('priimek')
+    datum_rojstva = request.forms.get('datum_rojstva')
+    e_posta = request.forms.get('e_posta')
+    funkcija = request.forms.get('funkcija')
+    datum_zaposlitve = request.forms.get('datum_zaposlitve')
+    telefon = request.forms.get('telefon')
+    prebivalisce = request.forms.get('prebivalisce')
+    modeli.uredi_osebo(oseba, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce)
+    redirect('/zaposleni')
+
 
 
 run(debug=True)

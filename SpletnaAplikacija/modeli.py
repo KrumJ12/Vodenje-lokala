@@ -7,7 +7,7 @@ povezava.row_factory = sqlite3.Row
 
 
 def seznamZaposlenih():
-    sql = '''SELECT ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,telefon,prebivalisce FROM zaposleni  ORDER BY datum_zaposlitve DESC'''
+    sql = '''SELECT id,ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,telefon,prebivalisce FROM zaposleni  ORDER BY datum_zaposlitve DESC'''
     return list(povezava.execute(sql))
 
 def izdaniRacuni():
@@ -187,7 +187,22 @@ def dodajZalogo(ime, kolicina):
     stavek='UPDATE izdelki SET zaloga= zaloga + ? WHERE ime=?'
     p.execute(stavek, (kolicina, ime))
     povezava.commit()
+
+def oseba(oseba):
+    sql = '''
+        SELECT id, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce
+        FROM zaposleni
+        WHERE id = ?
+    '''
+    return povezava.execute(sql, [oseba]).fetchone()
     
-    
+def uredi_osebo(oseba, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce):
+    sql = '''
+        UPDATE zaposleni
+        SET ime = ?, priimek = ?, datum_rojstva = ?, e_posta = ?, funkcija = ?, datum_zaposlitve = ?, telefon = ?, prebivalisce = ?
+        WHERE id = ?
+    '''
+    povezava.execute(sql, [ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce, oseba])
+    povezava.commit()
     
     
