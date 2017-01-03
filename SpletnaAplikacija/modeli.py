@@ -125,12 +125,12 @@ def vnesiRacun(id_natakarja,znesek,nacin_placila):
 def izracunajZnesek():
     pass
 
-def vnesiIzdelek(ime,zaloga,tip='/',cena = 0):
+def vnesiIzdelek(ime,zaloga,tip=None,cena = 0):
     if ime in seznamIzdelkov():
         stavek = 'UPDATE izdelki SET zaloga = zaloga + ? WHERE ime = ?'
         p.execute(stavek,(zaloga,ime))
     else:
-        if tip == '/' or cena == 0:
+        if tip == None or cena == 0:
             raise Exception('Gre za nov izdelek! Vnesi tip izdelka in/ali ceno!')
         stavek = 'INSERT INTO izdelki (ime,zaloga,tip,cena) VALUES (?,?,?,?)'
         p.execute(stavek,(ime,zaloga,tip,cena))
