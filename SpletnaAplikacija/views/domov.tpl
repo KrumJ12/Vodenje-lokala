@@ -41,7 +41,7 @@
  </th>
  <tr>
  <td>
-     <button  type="submit" class="btn btn-primary">Izprazni račun</button>
+     <a href="/" type="submit" class="btn btn-primary">Izprazni račun</a>
  </td>
  <td>
    <button type="submit" class="btn btn-primary">Zaključi račun</button>
