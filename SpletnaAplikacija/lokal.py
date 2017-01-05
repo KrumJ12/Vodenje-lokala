@@ -7,7 +7,14 @@ import modeli
 @route('/')
 def domov():
     return template(
-        'domov',imena=modeli.imeInCenaIzdelkov())
+        'domov',
+        imena=modeli.tabIzdelkov(),
+        stari_niz="",
+        izdelki=request.query.getall('id'),
+    )
+
+#'&'.join('izdelek={}'.format(id_izdelka))
+
 
 
 @route('/izdelki')
@@ -71,6 +78,8 @@ def dobavitelji():
     return template(
         'dobavitelji',seznam = modeli.seznamDobaviteljev())
 
+
+
 @post('/dobavitelji')
 def dodaj_dobavitelja():
     naziv=request.forms.naziv
@@ -121,9 +130,7 @@ def uredi_osebo_submit(oseba):
     prebivalisce = request.forms.prebivalisce
     modeli.uredi_osebo(oseba, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce)
     redirect('/zaposleni')
-
-
-
+    
 run(debug=True)
 
 

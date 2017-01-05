@@ -14,6 +14,10 @@ def izdaniRacuni():
     sql = '''SELECT id,id_natakarja,znesek,cas_nakupa,nacin_placila FROM racuni ORDER BY cas_nakupa DESC'''
     return list(povezava.execute(sql))
 
+def tabIzdelkov():
+    sql = '''SELECT id,ime,zaloga,tip,cena FROM izdelki'''
+    return list(povezava.execute(sql))
+
 
 def vnesiZaposlenega(ime,priimek,datum_rojstva,e_posta,funkcija,telefon,prebivalisce):
     # id se dodeli sam (AUTO INCREMENT)
