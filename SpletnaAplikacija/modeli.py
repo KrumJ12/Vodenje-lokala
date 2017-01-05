@@ -16,8 +16,11 @@ def izdaniRacuni():
 
 def tabIzdelkov():
     sql = '''SELECT id,ime,zaloga,tip,cena FROM izdelki'''
-    return list(povezava.execute(sql))
+    return {el['id']: el for el in povezava.execute(sql)}
 
+def imeCena(idizd):
+    sql = '''SELECT ime,cena FROM izdelki WHERE id = ?'''
+    return list(povezava.execute(sql),[idizd])
 
 def vnesiZaposlenega(ime,priimek,datum_rojstva,e_posta,funkcija,telefon,prebivalisce):
     # id se dodeli sam (AUTO INCREMENT)

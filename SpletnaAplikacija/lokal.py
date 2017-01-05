@@ -6,16 +6,13 @@ import modeli
 
 @route('/')
 def domov():
+    izdelki = [int(x) for x in request.query.getall('id')]
     return template(
-        'domov',
+        'domov',#imeCena=modeli.imeCena(idizd),
         imena=modeli.tabIzdelkov(),
-        stari_niz="",
-        izdelki=request.query.getall('id'),
+        izdelki = izdelki,
+        stari_niz='&'.join('id={}'.format(x) for x in izdelki)
     )
-
-#'&'.join('izdelek={}'.format(id_izdelka))
-
-
 
 @route('/izdelki')
 def izdelki():
