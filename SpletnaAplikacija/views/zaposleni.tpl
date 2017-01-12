@@ -1,8 +1,7 @@
 % rebase('osnova.tpl')
 
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav">
+<div class="container">
+
       <h4>Operacije</h4>
       <ul class="nav nav-pills nav-stacked">
 
@@ -10,11 +9,9 @@
 
       </ul><br>
 
-    </div>
 
-    <div class="col-sm-9">
 
-     <form method="post" id="uniquename" style="display:none;">
+<form method="post" id="uniquename" style="display:none;">
   <div class="form-group">
     <label for="ime">Ime</label>
     <input type="text" class="form-control" id="ime" name="ime" aria-describedby="emailHelp" placeholder="Vnesi ime zaposlenega">
@@ -69,7 +66,8 @@
 
 <div class="container">
 
-  <h2>Seznam zaposlenih</h2>         
+  <h2>Seznam zaposlenih:</h2> 
+  <br>        
   <table class="table">
 
     <thead>

@@ -46,22 +46,26 @@ def dodaj_Zalogo():
     modeli.dodajZalogo(ime,zaloga)
     redirect('/izdelki')
 
-@route('/pogodbe')
-def pogodbe():
-    return template(
-        'pogodbe',seznam=modeli.seznamPogodb(),imena=modeli.imenaDobaviteljev())
 
-@post('/pogodbe')
-def dodaj_pogodbo():
-    ime=request.forms.ime
-    tip=request.forms.tip
-    veljavnost=request.forms.veljavnost
-    # pretvori iz Imena v ID
-    id_dobavitelja=request.forms.id_dobavitelja
-    id_dobavitelja = modeli.vrniIDDobavitelja(id_dobavitelja)
-    modeli.vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost)
-    redirect('/pogodbe')
     
+@route('/racun')
+def racun():
+    return template(
+        'racun',seznam = modeli.izdaniRacuni())
+
+@post('/izdelki')
+def preberi():
+    ime = request.forms.ime
+    zaloga  = int(request.forms.zaloga)
+    tip = request.forms.tip
+    cena  = float(request.forms.cena)
+    
+    if 'Tip' in tip:
+        tip = '/'
+    modeli.vnesiIzdelek(ime,zaloga,tip,cena)
+    
+    redirect('/izdelki')
+######### ######### ######### #########
 
 @route('/zaposleni')
 def zaposleni():
@@ -81,45 +85,8 @@ def zaposleni():
     prebivalisce = request.forms.prebivalisce
     modeli.vnesiZaposlenega(ime,priimek,datum_rojstva,eposta,funkcija,tel,prebivalisce)
     redirect('/zaposleni')
-
-
-@route('/dobavitelji')
-def dobavitelji():
-    return template(
-        'dobavitelji',seznam = modeli.seznamDobaviteljev())
-
-
-@post('/dobavitelji')
-def dodaj_dobavitelja():
-    naziv=request.forms.naziv
-    naslov=request.forms.naslov
-    tel=request.forms.telefon
-    email=request.forms.eposta
-    davcna=request.forms.davcna
-    trr=request.forms.TRR
-    modeli.vnesiDobavitelja(naziv,naslov,tel,email,davcna,trr)
-    redirect('/dobavitelji')    
     
-
-@route('/racun')
-def racun():
-    return template(
-        'racun',seznam = modeli.izdaniRacuni())
-
-@post('/izdelki')
-def preberi():
-    ime = request.forms.ime
-    zaloga  = int(request.forms.zaloga)
-    tip = request.forms.tip
-    cena  = float(request.forms.cena)
-    
-    if 'Tip' in tip:
-        tip = '/'
-    modeli.vnesiIzdelek(ime,zaloga,tip,cena)
-    
-    redirect('/izdelki')
-######### ######### ######### #########
-# UREDI ZAPOSLENEGA
+# UREDI, IZBRIŠI ZAPOSLENEGA
 @get('/zaposleni/<id_zap>/uredi')
 def uredi_zaposlenega(id_zap):
     return template(
@@ -151,8 +118,74 @@ def odstrani_zaposlenega(id_zap):
     modeli.odstrani_zaposlenega(id_zap)
     redirect('/zaposleni')
 
-######### ######### ######### ######### 
-# UREDI, ODSTRANI DOBAVITELJA
+######### ######### ######### #########
+# POGODBE
+@route('/pogodbe')
+def pogodbe():
+    return template(
+        'pogodbe',seznam=modeli.seznamPogodb(),imena=modeli.imenaDobaviteljev())
+
+@post('/pogodbe')
+def dodaj_pogodbo():
+    ime=request.forms.ime
+    tip=request.forms.tip
+    veljavnost=request.forms.veljavnost
+    # pretvori iz Imena v ID
+    id_dobavitelja=request.forms.id_dobavitelja
+    id_dobavitelja = modeli.vrniIDDobavitelja(id_dobavitelja)
+    modeli.vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost)
+    redirect('/pogodbe')
+
+
+# UREDI  POGODBE
+@get('/pogodbe/<id_pog>/uredi')
+def uredi_zaposlenega(id_pog):
+    return template(
+        'urediPogodbo',
+        pogodba=modeli.pogodba(id_pog)
+    )
+
+@post('/pogodbe/<id_pog>/uredi')
+def uredi_pogodbo_submit(id_pog):
+    id_pog = request.forms.id_pog
+    tip = request.forms.tip
+    veljavnost = request.forms.veljavnost
+    ime = request.forms.ime
+    modeli.uredi_pogodbo(id_pog,tip,veljavnost,ime)
+    redirect('/pogodbe')
+
+# ODSTRANI POGODBO
+@get('/pogodbe/<id_pog>/odstrani')
+def odstrani_pogodbo(id_pog):
+    return template('odstraniPogodbo', pogodba=modeli.pogodba(id_pog))
+
+@post('/pogodbe/<id_pog>/odstrani')
+def odstrani_pogodbo(id_pog):
+    id_pog = request.forms.id_pog
+    modeli.odstrani_pogodbo(id_pog)
+    redirect('/pogodbe')
+
+############################################
+# DOBAVITELJI
+    
+@route('/dobavitelji')
+def dobavitelji():
+    return template(
+        'dobavitelji',seznam = modeli.seznamDobaviteljev())
+
+
+@post('/dobavitelji')
+def dodaj_dobavitelja():
+    naziv=request.forms.naziv
+    naslov=request.forms.naslov
+    tel=request.forms.telefon
+    email=request.forms.eposta
+    davcna=request.forms.davcna
+    trr=request.forms.TRR
+    modeli.vnesiDobavitelja(naziv,naslov,tel,email,davcna,trr)
+    redirect('/dobavitelji')
+    
+# UREDI DOBAVITELJA
 @get('/dobavitelji/<id_dob>/uredi')
 def uredi_dobavitelja(id_dob):
     return template('urediDobavitelja', dobavitelj = modeli.dobavitelj(id_dob))
@@ -168,7 +201,8 @@ def uredi_dobavitelja_submit(id_dob):
     trr = request.forms.trr
     modeli.uredi_dobavitelja(id_dob, naziv,naslov,telefon,e_posta,davcna,trr)
     redirect('/dobavitelji')
-
+    
+# ODSTRANI DOBAVITELJA
 
 @get('/dobavitelji/<id_dob>/odstrani')
 def odstrani_dobavitelja(id_dob):
@@ -180,7 +214,8 @@ def odstrani_dobavitelja(id_dob):
     id_dob = request.forms.id_dob
     modeli.odstrani_dobavitelja(id_dob)
     redirect('/dobavitelji')
-################# ######### ######### ######### 
+################# ######### ######### #########
+    
 run(debug=True)
 
 

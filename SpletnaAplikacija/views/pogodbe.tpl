@@ -1,8 +1,6 @@
 % rebase('osnova.tpl')
 
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav">
+<div class="container">
       <h4>Operacije</h4>
       <ul class="nav nav-pills nav-stacked">
 
@@ -10,9 +8,8 @@
 
       </ul><br>
 
-    </div>
 
-    <div class="col-sm-9">
+
 
 <form method="post" id="uniquename" style="display:none;">
   <div class="form-group">
@@ -56,19 +53,24 @@
 
 
 </form>
+</div>
 
-	
+
+
+
 <div class="container">
-  <h2>Seznam pogodb</h2>         
+  <h2>Seznam pogodb:</h2>  
+  <br>      
   <table class="table">
 
     <thead>
       <tr>
-        <th>ime</th>
-        <th>tip</th>
-        <th>veljavnost</th>
-		<th>id_dobavitelja</th>
-        <th>id</th>
+        <th>Ime</th>
+        <th>Tip</th>
+        <th>Veljavnost</th>
+		    <th>ID Dobavitelja te pogodbe</th>
+        <th>Uredi</th>
+        <th>Izbriši</th>
 
       </tr>
     </thead>
@@ -77,17 +79,17 @@
 
     % for pogodba in seznam:
       <tr>
-
-
         <td>{{pogodba['ime']}}</td>
         <td>{{pogodba['tip']}}</td>
         <td>{{pogodba['veljavnost']}}</td>
-		<td>{{pogodba['id_dobavitelja']}}</td>
-        <td>{{pogodba['id']}}</td>
-        
-
-      %end
+		    <td>{{pogodba['id_dobavitelja']}}</td>
+        <td><a href="/pogodbe/{{pogodba['id']}}/uredi">
+                            <i class="glyphicon glyphicon-pencil"></i></a></td>
+        <td><a href="/pogodbe/{{pogodba['id']}}/odstrani">
+                            <i class="glyphicon glyphicon-trash"></i></a></td>
+     %end  
       </tr>
+
     </tbody>
   </table>
 </div>

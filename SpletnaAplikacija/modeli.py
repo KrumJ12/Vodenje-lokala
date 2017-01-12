@@ -228,6 +228,32 @@ def odstrani_zaposlenega(id_zap):
     stavek = '''DELETE FROM zaposleni WHERE id = ?'''
     povezava.execute(stavek,[id_zap])
     povezava.commit()
+
+###############################################################################################
+# UREJANJE POGODBE
+
+def pogodba(id_pog):
+    sql = '''
+        SELECT id, id_dobavitelja, tip, veljavnost, ime
+        FROM pogodba
+        WHERE id = ?
+    '''
+    return povezava.execute(sql, [id_pog]).fetchone()
+    
+def uredi_pogodbo(id_pog, tip, veljavnost, ime):
+    sql = '''
+        UPDATE pogodba
+        SET tip = ?, veljavnost = ?, ime = ?
+        WHERE id = ?
+    '''
+    povezava.execute(sql, [tip,veljavnost,ime,id_pog])
+    povezava.commit()
+# ODSTRANI POGODBO
+
+def odstrani_pogodbo(id_pog):
+    stavek = '''DELETE FROM pogodba WHERE id = ?'''
+    povezava.execute(stavek,[id_pog])
+    povezava.commit()
     
 ###############################################################################################
 # UREJANJE DOBAVITELJA
@@ -252,7 +278,6 @@ def uredi_dobavitelja(id_dob,naziv,naslov,telefon,e_posta,davcna_stevilka,trr):
     povezava.execute(stavek,[naziv,naslov,telefon,e_posta,davcna_stevilka,trr,id_dob])
     povezava.commit()
 
-################################################################################################
 # ODSTRANI DOBAVITELJA TER POGODBO, ČE JO IMA
 def odstrani_dobavitelja(id_dob):
     stavek = '''DELETE FROM dobavitelji WHERE id = ?'''

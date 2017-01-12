@@ -1,8 +1,7 @@
 % rebase('osnova.tpl')
 
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav">
+<div class="container">
+
       <h4>Operacije</h4>
       <ul class="nav nav-pills nav-stacked">
 
@@ -12,9 +11,8 @@
 
       </ul><br>
 
-    </div>
+  
 
-    <div class="col-sm-9">
 
 
 
@@ -54,9 +52,9 @@
 
 
 </form>
-</div>
 
- <div class="col-sm-9">
+
+
 <form action="/spremeniCeno" method="post" id="uniquename2" style="display:none;">
 
   <div class="form-group">
@@ -79,9 +77,9 @@
 
 
 </form>
-  </div>
   
- <div class="col-sm-9">
+  
+
 <form action="/dodajZalogo" method="post" id="uniquename3" style="display:none;">
 
   <div class="form-group">
@@ -104,9 +102,11 @@
 
 
 </form>
+</div>
 
 <div class="container">
-  <h2>Izdelki:</h2>         
+  <h2>Izdelki:</h2>   
+  <br>      
   <table class="table">
 
     <thead>
@@ -115,6 +115,8 @@
         <th>Tip</th>
         <th>Zaloga</th>
         <th>Cena</th>
+        <th>Uredi</th>
+        <th>Izbriši</th>
       </tr>
 
     </thead>
@@ -127,6 +129,10 @@
   <td>{{izdelek['tip']}}</td>
   <td>{{izdelek['zaloga']}}</td>
   <td>{{izdelek['cena']}} €</td>
+  <td><a href="">
+                            <i class="glyphicon glyphicon-pencil"></i></a></td>
+  <td><a href="">
+                            <i class="glyphicon glyphicon-trash"></i></a></td>
   </tr>
 %end
 
@@ -134,4 +140,4 @@
   </table>
 </div>
 
-  </div>
+ 

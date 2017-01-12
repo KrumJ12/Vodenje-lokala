@@ -1,8 +1,7 @@
 % rebase('osnova.tpl')
 
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav">
+<div class="container">
+
       <h4>Operacije</h4>
       <ul class="nav nav-pills nav-stacked">
 
@@ -10,9 +9,8 @@
 
       </ul><br>
 
-    </div>
 
-    <div class="col-sm-9">
+
 
  <form method="post" id="uniquename" style="display:none;">
   <div class="form-group">
@@ -53,9 +51,11 @@
 
 
 </form>
+</div>
 
 <div class="container">
-  <h2>Seznam dobaviteljev</h2>         
+  <h2>Seznam dobaviteljev:</h2>  
+  <br>       
   <table class="table">
 
     <thead>
