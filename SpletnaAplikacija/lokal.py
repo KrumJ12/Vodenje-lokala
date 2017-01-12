@@ -4,6 +4,9 @@
 from bottle import route, run, template, request, get, post, redirect
 import modeli
 
+
+################################################
+# PRVA STRAN IN IZDAJA RAČUNOV
 @route('/')
 def domov():
     izdelki = [int(x) for x in request.query.getall('id')]
@@ -26,7 +29,15 @@ def vnesiRacun():
         return
     modeli.vnesiRacun(znesek)
     redirect('/racun')
+################################################
+# TABELA IZDANIH RAČUNOV
+@route('/racun')
+def racun():
+    return template(
+        'racun',seznam = modeli.izdaniRacuni())
+#################################################
 
+# IZDELKI
 @route('/izdelki')
 def izdelki():
     return template('izdelki',imena=modeli.seznamImenovIzdelkov(),
@@ -46,13 +57,6 @@ def dodaj_Zalogo():
     modeli.dodajZalogo(ime,zaloga)
     redirect('/izdelki')
 
-
-    
-@route('/racun')
-def racun():
-    return template(
-        'racun',seznam = modeli.izdaniRacuni())
-
 @post('/izdelki')
 def preberi():
     ime = request.forms.ime
@@ -65,6 +69,36 @@ def preberi():
     modeli.vnesiIzdelek(ime,zaloga,tip,cena)
     
     redirect('/izdelki')
+
+# UREDI, IZBRIŠI IZDELEK
+
+##@get('/izdelki/<id_izd>/uredi')
+##def uredi_izdelek(id_izd):
+##    return template(
+##        'urediIzdelek',
+##        izdelek=modeli.izdelek(id_izd)
+##    )
+##
+##@post('/izdelki/<id_izd>/uredi')
+##def uredi_izdelek_submit(id_izd):
+##    id_izd = request.forms.id_izd
+##    ime = request.forms.ime
+##    tip = request.forms.tip
+##    zaloga = request.forms.zaloga
+##    cena = request.forms.cena
+##    modeli.uredi_izdelek(id_izd,ime,tip,zaloga,cena)
+##    redirect('/izdelki')
+##
+##@get('/izdelki/<id_izd>/odstrani')
+##def odstrani_izdelek(id_izd):
+##    return template('odstraniIzdelek', izdelek = modeli.izdelek(id_izd))
+##
+##@post('/izdelki/<id_izd>/odstrani')
+##def odstrani_izdelek(id_izd):
+##    id_izd = request.forms.id_izd
+##    modeli.odstrani_izdelek(id_izd)
+##    redirect('/izdelki')
+    
 ######### ######### ######### #########
 
 @route('/zaposleni')
