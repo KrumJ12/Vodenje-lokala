@@ -70,7 +70,7 @@ def seznamPogodb():
     return list(povezava.execute(sql))
 
 def seznamDobaviteljev():
-    sql = '''SELECT naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji'''
+    sql = '''SELECT id,naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji'''
     return list(povezava.execute(sql))
 
 def imenaDobaviteljev():
@@ -204,6 +204,9 @@ def dodajZalogo(ime, kolicina):
     p.execute(stavek, (kolicina, ime))
     povezava.commit()
 
+###############################################################################################
+# UREJANJE ZAPOSLENEGA
+
 def oseba(oseba):
     sql = '''
         SELECT id, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce
@@ -221,4 +224,38 @@ def uredi_osebo(oseba, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposli
     povezava.execute(sql, [ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce, oseba])
     povezava.commit()
     
+###############################################################################################
+# UREJANJE DOBAVITELJA
+
+def dobavitelj(id_dob):
+    """Vrne podatke o dobavitelju z IDjem id_dob
+    V obliki za html"""
+    stavek = '''SELECT id,naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji
+                WHERE id = ?'''
+
+    return povezava.execute(stavek,[id_dob]).fetchone()
+
+def pogodbeDobaviteljev(id_dob):
+    """Vrne podatke o pogodbah dobavitelja id_dob"""
+    stavek = '''SELECT id,id_dobavitelja,tip,veljavnost,ime FROM pogodba WHERE id_dobavitelja = ?'''
+    return povezava.execute(stavek,[id_dob]).fetchall()
+
+def uredi_dobavitelja(id_dob,naziv,naslov,telefon,e_posta,davcna_stevilka,trr):
+    stavek = '''UPDATE dobavitelji
+    SET naziv = ?, naslov =?, telefon=?, e_posta=?, davcna_stevilka=?,trr=?
+    WHERE id = ?'''
+    povezava.execute(stavek,[naziv,naslov,telefon,e_posta,davcna_stevilka,trr,id_dob])
+    povezava.commit()
+
+################################################################################################
+# ODSTRANI DOBAVITELJA TER POGODBO, ČE JO IMA
+def odstrani_dobavitelja(id_dob):
+    stavek = '''DELETE FROM dobavitelji WHERE id = ?'''
+    stavek2 = '''DELETE FROM pogodba WHERE id_dobavitelja= ? '''
+    povezava.execute(stavek2,[id_dob])
+    povezava.execute(stavek,[id_dob])
+
+    povezava.commit()
     
+################################################################################################
+

@@ -66,6 +66,8 @@
         <th>E-pošta</th>
         <th>Davčna številka</th>
         <th>TRR</th>
+        <th>Uredi</th>
+        <th>Odstrani</th>
 
       </tr>
     </thead>
@@ -82,7 +84,14 @@
         <td>{{dobavitelj['e_posta']}}</td>
         <td>{{dobavitelj['davcna_stevilka']}}</td>
         <td>{{dobavitelj['trr']}}</td>
+        <td><a href="/dobavitelji/{{dobavitelj['id']}}/uredi">
+                            <i class="glyphicon glyphicon-pencil"></i></a>
+        </td>
+        <td><a href="/dobavitelji/{{dobavitelj['id']}}/odstrani">
+                            <i class="glyphicon glyphicon-trash"></i></a>
+        </td>
 
+        
       %end
       </tr>
     </tbody>

@@ -89,7 +89,6 @@ def dobavitelji():
         'dobavitelji',seznam = modeli.seznamDobaviteljev())
 
 
-
 @post('/dobavitelji')
 def dodaj_dobavitelja():
     naziv=request.forms.naziv
@@ -140,6 +139,34 @@ def uredi_osebo_submit(oseba):
     prebivalisce = request.forms.prebivalisce
     modeli.uredi_osebo(oseba, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce)
     redirect('/zaposleni')
+
+@get('/dobavitelji/<id_dob>/uredi')
+def uredi_dobavitelja(id_dob):
+    return template('urediDobavitelja', dobavitelj = modeli.dobavitelj(id_dob))
+
+@post('/dobavitelji/<id_dob>/uredi')
+def uredi_dobavitelja_submit(id_dob):
+    id_dob = request.forms.id_dob
+    naziv = request.forms.naziv
+    naslov = request.forms.naslov
+    telefon = request.forms.telefon
+    e_posta = request.forms.e_posta
+    davcna = request.forms.davcna
+    trr = request.forms.trr
+    modeli.uredi_dobavitelja(id_dob, naziv,naslov,telefon,e_posta,davcna,trr)
+    redirect('/dobavitelji')
+
+
+@get('/dobavitelji/<id_dob>/odstrani')
+def odstrani_dobavitelja(id_dob):
+    return template('odstraniDobavitelja', dobavitelj = modeli.dobavitelj(id_dob),
+                    pogodbe = modeli.pogodbeDobaviteljev(id_dob))
+
+@post('/dobavitelji/<id_dob>/odstrani')
+def odstrani_dobavitelja(id_dob):
+    id_dob = request.forms.id_dob
+    modeli.odstrani_dobavitelja(id_dob)
+    redirect('/dobavitelji')
     
 run(debug=True)
 
