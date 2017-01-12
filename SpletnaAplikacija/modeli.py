@@ -22,24 +22,7 @@ def imeCena(idizd):
     sql = '''SELECT ime,cena FROM izdelki WHERE id = ?'''
     return list(povezava.execute(sql),[idizd])
 
-def vnesiZaposlenega(ime,priimek,datum_rojstva,e_posta,funkcija,telefon,prebivalisce):
-    # id se dodeli sam (AUTO INCREMENT)
-    # ime in priimek poljubna niza
-    # datum rojstva v obliki 'LETO-MESEC-DAN'
-    # e_posta poljuben niz
-    # funkcija med 1 in 5
-    # datum zaposlitve bo datum na dan vnosa
-    # telefon je oblike 'xxx xxx xxx'
-    # prebivališče poljuben niz
-    if datum_rojstva[4] != '-' or datum_rojstva[7] != '-':
-        raise Exception('Napačna oblika datuma')
-    if not 1<=funkcija<=5:
-        raise Exception('Ta funkcija ne obstaja')
-    danes = date.today()
-    datum_zaposlitve = danes.isoformat()
-    stavek = 'INSERT INTO zaposleni (ime,priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce) VALUES (?,?,?,?,?,?,?,?)'
-    povezava.execute(stavek, (ime,priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce))
-    povezava.commit()
+
 
 def seznamIzdelkov():
     izdelki = []
@@ -81,30 +64,6 @@ def vrniIDDobavitelja(naziv):
     sql = '''SELECT id FROM dobavitelji WHERE naziv = ?'''
     return list(p.execute(sql,[naziv]))[0][0]
 
-def vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost):
-    # id se dodeli sam AUTO INCREMENT
-    # tip je "hrana","pijača","ostalo"
-    # veljavnost do vključno "LETO-MESEC"
-    if veljavnost[4] != "-":
-        raise Exception('Datum pogodbe je neveljaven')
-    stavek = 'INSERT INTO pogodba (id_dobavitelja,tip,veljavnost,ime) VALUES (?,?,?,?)'
-    p.execute(stavek, (id_dobavitelja,tip,veljavnost,ime))
-    povezava.commit()
-
-def vnesiDobavitelja(naziv,naslov,telefon,e_posta,davcna_stevilka,trr):
-    #naziv npr. Naziv s.p.
-    # telefon xxx xxx xxx
-    # davcna 8 mestna
-    # trr SI56 xxxx xxxx xxxx xxx
-    if not "@" in e_posta:
-        raise Exception('Nepravilen zapis e-pošte')
-    if len(str(davcna_stevilka)) != 8:
-        raise Exception('Nepravilna davčna številka')
-    if len(trr) != 23:
-        raise Exception('Nepravilen TRR')
-    stavek = 'INSERT INTO dobavitelji (naziv,naslov,telefon,e_posta,davcna_stevilka,trr) VALUES (?,?,?,?,?,?)'
-    p.execute(stavek, (naziv,naslov,telefon,e_posta,davcna_stevilka,trr))
-    povezava.commit()
     
 def vnesiRacun(znesek):
     # znesek je potrebno izračunati s funkcijo izracunajZnesek
@@ -140,17 +99,6 @@ def izracunajZnesek(sez):
         stavek = 'SELECT cena FROM izdelki WHERE id = ?'
         znesek += list(p.execute(stavek,[st]))[0][0]
     return znesek
-
-def vnesiIzdelek(ime,zaloga,tip=None,cena = 0):
-    if ime in seznamIzdelkov():
-        stavek = 'UPDATE izdelki SET zaloga = zaloga + ? WHERE ime = ?'
-        p.execute(stavek,(zaloga,ime))
-    else:
-        if tip == None or cena == 0:
-            raise Exception('Gre za nov izdelek! Vnesi tip izdelka in/ali ceno!')
-        stavek = 'INSERT INTO izdelki (ime,zaloga,tip,cena) VALUES (?,?,?,?)'
-        p.execute(stavek,(ime,zaloga,tip,cena))
-    povezava.commit()
 
 def vnesiAkcijo(izdelek_ime, zacetek, konec, vrednost):
     #zacetek in konec akcije sta v obliki llll-mm-dd
@@ -188,6 +136,22 @@ def seznamImenovIzdelkov():
     sql='''SELECT ime FROM izdelki ORDER BY ime ASC'''
     return list(povezava.execute(sql))
 
+
+    
+###############################################################################################
+# VNESI IZDELEK
+
+def vnesiIzdelek(ime,zaloga,tip=None,cena = 0):
+    if ime in seznamIzdelkov():
+        stavek = 'UPDATE izdelki SET zaloga = zaloga + ? WHERE ime = ?'
+        p.execute(stavek,(zaloga,ime))
+    else:
+        if tip == None or cena == 0:
+            raise Exception('Gre za nov izdelek! Vnesi tip izdelka in/ali ceno!')
+        stavek = 'INSERT INTO izdelki (ime,zaloga,tip,cena) VALUES (?,?,?,?)'
+        p.execute(stavek,(ime,zaloga,tip,cena))
+    povezava.commit()
+
 def spremeniCeno(ime_izdelka,nova_cena):
     '''danemu izdelku bomo spremenili ceno'''
     if ime_izdelka in seznamIzdelkov():
@@ -204,7 +168,51 @@ def dodajZalogo(ime, kolicina):
     p.execute(stavek, (kolicina, ime))
     povezava.commit()
 
+# UREJANJE, BRISANJE IZDELKA
+def izdelek(id_izd):
+    sql = '''
+        SELECT id,ime,tip,zaloga,cena FROM izdelki
+        WHERE id = ?
+    '''
+    return povezava.execute(sql,[id_izd]).fetchone()
+    
+def uredi_izdelek(id_izd,ime,tip,zaloga,cena):
+    sql = '''
+        UPDATE izdelki
+        SET ime = ?, tip = ?, zaloga = ?, cena = ?
+        WHERE id = ?
+    '''
+    povezava.execute(sql, [ime,tip,zaloga,cena,id_izd])
+    povezava.commit()
+
+def odstrani_izdelek(id_izd):
+    stavek = '''DELETE FROM izdelki WHERE id = ?'''
+    povezava.execute(stavek,[id_izd])
+    povezava.commit()
+
 ###############################################################################################
+# VNESI ZAPOSLENEGA
+def vnesiZaposlenega(ime,priimek,datum_rojstva,e_posta,funkcija,telefon,prebivalisce):
+    # id se dodeli sam (AUTO INCREMENT)
+    # ime in priimek poljubna niza
+    # datum rojstva v obliki 'LETO-MESEC-DAN'
+    # e_posta poljuben niz
+    # funkcija med 1 in 5
+    # datum zaposlitve bo datum na dan vnosa
+    # telefon je oblike 'xxx xxx xxx'
+    # prebivališče poljuben niz
+    if datum_rojstva[4] != '-' or datum_rojstva[7] != '-':
+        raise Exception('Napačna oblika datuma')
+    if not 1<=funkcija<=5:
+        raise Exception('Ta funkcija ne obstaja')
+    danes = date.today()
+    datum_zaposlitve = danes.isoformat()
+    stavek = 'INSERT INTO zaposleni (ime,priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce) VALUES (?,?,?,?,?,?,?,?)'
+    povezava.execute(stavek, (ime,priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce))
+    povezava.commit()
+
+
+
 # UREJANJE ZAPOSLENEGA
 
 def zaposlen(id_zap):
@@ -230,6 +238,18 @@ def odstrani_zaposlenega(id_zap):
     povezava.commit()
 
 ###############################################################################################
+# VNESI POGODBO
+
+def vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost):
+    # id se dodeli sam AUTO INCREMENT
+    # tip je "hrana","pijača","ostalo"
+    # veljavnost do vključno "LETO-MESEC"
+    if veljavnost[4] != "-":
+        raise Exception('Datum pogodbe je neveljaven')
+    stavek = 'INSERT INTO pogodba (id_dobavitelja,tip,veljavnost,ime) VALUES (?,?,?,?)'
+    p.execute(stavek, (id_dobavitelja,tip,veljavnost,ime))
+    povezava.commit()
+
 # UREJANJE POGODBE
 
 def pogodba(id_pog):
@@ -256,6 +276,25 @@ def odstrani_pogodbo(id_pog):
     povezava.commit()
     
 ###############################################################################################
+# VNESI DOBAVITELJA
+
+def vnesiDobavitelja(naziv,naslov,telefon,e_posta,davcna_stevilka,trr):
+    #naziv npr. Naziv s.p.
+    # telefon xxx xxx xxx
+    # davcna 8 mestna
+    # trr SI56 xxxx xxxx xxxx xxx
+    if not "@" in e_posta:
+        raise Exception('Nepravilen zapis e-pošte')
+    if len(str(davcna_stevilka)) != 8:
+        raise Exception('Nepravilna davčna številka')
+    if len(trr) != 23:
+        raise Exception('Nepravilen TRR')
+    stavek = 'INSERT INTO dobavitelji (naziv,naslov,telefon,e_posta,davcna_stevilka,trr) VALUES (?,?,?,?,?,?)'
+    p.execute(stavek, (naziv,naslov,telefon,e_posta,davcna_stevilka,trr))
+    povezava.commit()
+
+
+
 # UREJANJE DOBAVITELJA
 
 def dobavitelj(id_dob):
