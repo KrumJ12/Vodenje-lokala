@@ -26,8 +26,8 @@
       <tr>
         <td>{{zaposlen['ime']}}</td>
         <td>{{zaposlen['priimek']}}</td>
-        <td>{{zaposlen['datum_rojstva']}}</td>
         <td>{{zaposlen['funkcija']}}</td>
+        <td>{{zaposlen['datum_rojstva']}}</td>
         <td>{{zaposlen['e_posta']}}</td>
         <td>{{zaposlen['datum_zaposlitve']}}</td>
         <td>{{zaposlen['telefon']}}</td>
