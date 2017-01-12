@@ -19,6 +19,9 @@ def domov():
 @route('/vnesi')
 def vnesiIzdelek():
     znesek = round(modeli.izracunajZnesek(sez),2)
+    if znesek == 0:
+        redirect('/')
+        return
     modeli.vnesiRacun(znesek)
     redirect('/racun')
 
