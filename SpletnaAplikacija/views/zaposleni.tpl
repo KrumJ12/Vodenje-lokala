@@ -82,7 +82,8 @@
         <th>Datum zaposlitve</th>
         <th>Telefon</th>
         <th>Prebivališče</th>
-        <th></th>
+        <th>Uredi</th>
+        <th>Odstrani</th>
       </tr>
     </thead>
 
@@ -98,11 +99,13 @@
         <td>{{zaposlen['datum_zaposlitve']}}</td>
         <td>{{zaposlen['telefon']}}</td>
         <td>{{zaposlen['prebivalisce']}}</td>
-        <td><a href="/oseba/{{zaposlen['id']}}/uredi">
+        <td><a href="/zaposleni/{{zaposlen['id']}}/uredi">
                             <i class="glyphicon glyphicon-pencil"></i>
                         </a>
         </td>
-
+        <td><a href="/zaposleni/{{zaposlen['id']}}/odstrani">
+                            <i class="glyphicon glyphicon-trash"></i></a>
+        </td>
       %end
       </tr>
     </tbody>

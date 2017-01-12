@@ -118,17 +118,18 @@ def preberi():
     modeli.vnesiIzdelek(ime,zaloga,tip,cena)
     
     redirect('/izdelki')
-
-@get('/oseba/<oseba>/uredi')
-def uredi_osebo(oseba):
+######### ######### ######### #########
+# UREDI ZAPOSLENEGA
+@get('/zaposleni/<id_zap>/uredi')
+def uredi_zaposlenega(id_zap):
     return template(
-        'urediOsebo',
-        oseba=modeli.oseba(oseba)
+        'urediZaposlenega',
+        zaposlen=modeli.zaposlen(id_zap)
     )
 
-@post('/oseba/<oseba>/uredi')
-def uredi_osebo_submit(oseba):
-    oseba = request.forms.oseba
+@post('/zaposleni/<id_zap>/uredi')
+def uredi_zaposlenega_submit(id_zap):
+    id_zap = request.forms.id_zap
     ime = request.forms.ime
     priimek = request.forms.priimek
     datum_rojstva = request.forms.datum_rojstva
@@ -137,9 +138,21 @@ def uredi_osebo_submit(oseba):
     datum_zaposlitve = request.forms.datum_zaposlitve
     telefon = request.forms.telefon
     prebivalisce = request.forms.prebivalisce
-    modeli.uredi_osebo(oseba, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce)
+    modeli.uredi_zaposlenega(id_zap, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce)
     redirect('/zaposleni')
 
+@get('/zaposleni/<id_zap>/odstrani')
+def odstrani_zaposlenega(id_zap):
+    return template('odstraniZaposlenega', zaposlen = modeli.zaposlen(id_zap))
+
+@post('/zaposleni/<id_zap>/odstrani')
+def odstrani_zaposlenega(id_zap):
+    id_zap = request.forms.id_zap
+    modeli.odstrani_zaposlenega(id_zap)
+    redirect('/zaposleni')
+
+######### ######### ######### ######### 
+# UREDI, ODSTRANI DOBAVITELJA
 @get('/dobavitelji/<id_dob>/uredi')
 def uredi_dobavitelja(id_dob):
     return template('urediDobavitelja', dobavitelj = modeli.dobavitelj(id_dob))
@@ -167,7 +180,7 @@ def odstrani_dobavitelja(id_dob):
     id_dob = request.forms.id_dob
     modeli.odstrani_dobavitelja(id_dob)
     redirect('/dobavitelji')
-    
+################# ######### ######### ######### 
 run(debug=True)
 
 

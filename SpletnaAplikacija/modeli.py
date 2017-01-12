@@ -207,21 +207,26 @@ def dodajZalogo(ime, kolicina):
 ###############################################################################################
 # UREJANJE ZAPOSLENEGA
 
-def oseba(oseba):
+def zaposlen(id_zap):
     sql = '''
         SELECT id, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce
         FROM zaposleni
         WHERE id = ?
     '''
-    return povezava.execute(sql, [oseba]).fetchone()
+    return povezava.execute(sql, [id_zap]).fetchone()
     
-def uredi_osebo(oseba, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce):
+def uredi_zaposlenega(id_zap, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce):
     sql = '''
         UPDATE zaposleni
         SET ime = ?, priimek = ?, datum_rojstva = ?, e_posta = ?, funkcija = ?, datum_zaposlitve = ?, telefon = ?, prebivalisce = ?
         WHERE id = ?
     '''
-    povezava.execute(sql, [ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce, oseba])
+    povezava.execute(sql, [ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce, id_zap])
+    povezava.commit()
+
+def odstrani_zaposlenega(id_zap):
+    stavek = '''DELETE FROM zaposleni WHERE id = ?'''
+    povezava.execute(stavek,[id_zap])
     povezava.commit()
     
 ###############################################################################################
