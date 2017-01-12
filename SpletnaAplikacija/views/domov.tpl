@@ -10,6 +10,7 @@
 
   <h1>Vnesi račun:</h1><hr>
 
+
 <table class="table table-striped table-hover table-bordered">
 
     <thead>
@@ -44,11 +45,10 @@
      <a href="/" type="submit" class="btn btn-primary">Izprazni račun</a>
  </td>
  <td>
-   <button type="submit" class="btn btn-primary">Zaključi račun</button>
+   <a href="/vnesi" class="btn btn-primary">Zaključi račun</a>
  </td>
  </tr>
   </table>
-
 
 
         

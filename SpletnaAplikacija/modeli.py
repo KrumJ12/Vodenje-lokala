@@ -106,7 +106,7 @@ def vnesiDobavitelja(naziv,naslov,telefon,e_posta,davcna_stevilka,trr):
     p.execute(stavek, (naziv,naslov,telefon,e_posta,davcna_stevilka,trr))
     povezava.commit()
     
-def vnesiRacun(id_natakarja,znesek,nacin_placila):
+def vnesiRacun(znesek):
     # znesek je potrebno izračunati s funkcijo izracunajZnesek
     # cas_nakupa bo ob vnosu računa
     # način plačila je niz 'gotovina','kartica','dobavnica'
@@ -126,11 +126,20 @@ def vnesiRacun(id_natakarja,znesek,nacin_placila):
     cas_nakupa = tt[0]+"-"+tt[1]+"-"+tt[2]+" "+tt[3]+":"+tt[4]
 
     #id natakarja
-
-    # znesek
-
-def izracunajZnesek():
-    pass
+    id_natakarja = 15
+    #nacin placila
+    nacin_placila = 'gotovina'
+    
+    stavek = 'INSERT INTO racuni (id_natakarja,znesek,cas_nakupa,nacin_placila) VALUES (?,?,?,?)'
+    p. execute(stavek,(id_natakarja,znesek,cas_nakupa,nacin_placila))
+    
+def izracunajZnesek(sez):
+    # dobi seznam izdelkov in izračuna znesek
+    znesek = 0
+    for st in sez:
+        stavek = 'SELECT cena FROM izdelki WHERE id = ?'
+        znesek += list(p.execute(stavek,[st]))[0][0]
+    return znesek
 
 def vnesiIzdelek(ime,zaloga,tip=None,cena = 0):
     if ime in seznamIzdelkov():

@@ -7,12 +7,20 @@ import modeli
 @route('/')
 def domov():
     izdelki = [int(x) for x in request.query.getall('id')]
+    sez = izdelki
+    global sez
     return template(
-        'domov',#imeCena=modeli.imeCena(idizd),
+        'domov',
         imena=modeli.tabIzdelkov(),
         izdelki = izdelki,
         stari_niz='&'.join('id={}'.format(x) for x in izdelki)
     )
+
+@route('/vnesi')
+def vnesiIzdelek():
+    znesek = round(modeli.izracunajZnesek(sez),2)
+    modeli.vnesiRacun(znesek)
+    redirect('/racun')
 
 @route('/izdelki')
 def izdelki():
