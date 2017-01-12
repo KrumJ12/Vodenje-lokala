@@ -7,8 +7,10 @@ import modeli
 @route('/')
 def domov():
     izdelki = [int(x) for x in request.query.getall('id')]
-    sez = izdelki
+
+    # seznam rabimo pri vnosu racuna
     global sez
+    sez = izdelki
     return template(
         'domov',
         imena=modeli.tabIzdelkov(),
@@ -17,7 +19,7 @@ def domov():
     )
 
 @route('/vnesi')
-def vnesiIzdelek():
+def vnesiRacun():
     znesek = round(modeli.izracunajZnesek(sez),2)
     if znesek == 0:
         redirect('/')

@@ -11,6 +11,17 @@
   <h1>Vnesi račun:</h1><hr>
 
 
+<div class="radio">
+  <label><input type="radio" value = "optradio" name="optradio" checked>gotovina</label>
+</div>
+<div class="radio">
+  <label><input type="radio" value = "optradio" name="optradio">kartica</label>
+</div>
+<div class="radio">
+  <label><input type="radio" value = "optradio" name="optradio">dobavnica</label>
+</div>
+
+
 <table class="table table-striped table-hover table-bordered">
 
     <thead>
