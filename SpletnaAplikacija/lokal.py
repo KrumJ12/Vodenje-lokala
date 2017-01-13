@@ -10,10 +10,6 @@ import modeli
 @route('/')
 def domov():
     izdelki = [int(x) for x in request.query.getall('id')]
-
-    # seznam rabimo pri vnosu racuna
-    global sez
-    sez = izdelki
     return template(
         'domov',
         imena=modeli.tabIzdelkov(),
@@ -21,14 +17,15 @@ def domov():
         stari_niz='&'.join('id={}'.format(x) for x in izdelki)
     )
 
-@route('/vnesi')
-def vnesiRacun():
-    znesek = round(modeli.izracunajZnesek(sez),2)
-    if znesek == 0:
-        redirect('/')
-        return
-    modeli.vnesiRacun(znesek)
-    redirect('/racun')
+@route('/<stari_niz>')
+def vnesiRacun(stari_niz):
+    print(stari_niz)
+##    znesek = round(modeli.izracunajZnesek(sez),2)
+##    if znesek == 0:
+##        redirect('/')
+##        return
+##    modeli.vnesiRacun(znesek)
+    redirect('/')
 ################################################
 # TABELA IZDANIH RAČUNOV
 @route('/racun')

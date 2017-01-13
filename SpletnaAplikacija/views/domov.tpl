@@ -56,7 +56,7 @@
      <a href="/" type="submit" class="btn btn-primary">Izprazni račun</a>
  </td>
  <td>
-   <a href="/vnesi" class="btn btn-primary">Zaključi račun</a>
+   <a href="/{{stari_niz}}" class="btn btn-primary">Zaključi račun</a>
  </td>
  </tr>
   </table>
