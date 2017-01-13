@@ -129,9 +129,9 @@
   <td>{{izdelek['tip']}}</td>
   <td>{{izdelek['zaloga']}}</td>
   <td>{{izdelek['cena']}} €</td>
-  <td><a href="">
+  <td><a href="/izdelki/{{izdelek['id']}}/uredi">
                             <i class="glyphicon glyphicon-pencil"></i></a></td>
-  <td><a href="">
+  <td><a href="/izdelki/{{izdelek['id']}}/odstrani">
                             <i class="glyphicon glyphicon-trash"></i></a></td>
   </tr>
 %end

@@ -40,7 +40,7 @@ def racun():
 # IZDELKI
 @route('/izdelki')
 def izdelki():
-    return template('izdelki',imena=modeli.seznamImenovIzdelkov(),
+    return template('izdelki',imena=modeli.seznamImenIzdelkov(),
                     izdelki = modeli.tabelaIzdelkov())
 
 @post('/spremeniCeno')
@@ -72,32 +72,31 @@ def preberi():
 
 # UREDI, IZBRIŠI IZDELEK
 
-##@get('/izdelki/<id_izd>/uredi')
-##def uredi_izdelek(id_izd):
-##    return template(
-##        'urediIzdelek',
-##        izdelek=modeli.izdelek(id_izd)
-##    )
-##
-##@post('/izdelki/<id_izd>/uredi')
-##def uredi_izdelek_submit(id_izd):
-##    id_izd = request.forms.id_izd
-##    ime = request.forms.ime
-##    tip = request.forms.tip
-##    zaloga = request.forms.zaloga
-##    cena = request.forms.cena
-##    modeli.uredi_izdelek(id_izd,ime,tip,zaloga,cena)
-##    redirect('/izdelki')
-##
-##@get('/izdelki/<id_izd>/odstrani')
-##def odstrani_izdelek(id_izd):
-##    return template('odstraniIzdelek', izdelek = modeli.izdelek(id_izd))
-##
-##@post('/izdelki/<id_izd>/odstrani')
-##def odstrani_izdelek(id_izd):
-##    id_izd = request.forms.id_izd
-##    modeli.odstrani_izdelek(id_izd)
-##    redirect('/izdelki')
+@get('/izdelki/<id_izd>/uredi')
+def uredi_izdelek(id_izd):
+    return template(
+        'urediIzdelek',
+        izdelek=modeli.izdelek(id_izd))
+
+@post('/izdelki/<id_izd>/uredi')
+def uredi_izdelek_submit(id_izd):
+    id_izd = request.forms.id_izd
+    ime = request.forms.ime
+    tip = request.forms.tip
+    zaloga = request.forms.zaloga
+    cena = request.forms.cena
+    modeli.uredi_izdelek(id_izd,ime,tip,zaloga,cena)
+    redirect('/izdelki')
+
+@get('/izdelki/<id_izd>/odstrani')
+def odstrani_izdelek(id_izd):
+    return template('odstraniIzdelek', izdelek = modeli.izdelek(id_izd))
+
+@post('/izdelki/<id_izd>/odstrani')
+def odstrani_izdelek(id_izd):
+    id_izd = request.forms.id_izd
+    modeli.odstrani_izdelek(id_izd)
+    redirect('/izdelki')
     
 ######### ######### ######### #########
 
@@ -136,6 +135,8 @@ def uredi_zaposlenega_submit(id_zap):
     datum_rojstva = request.forms.datum_rojstva
     e_posta = request.forms.e_posta
     funkcija = request.forms.funkcija
+    sez = ['Šef','Vodja izmene','Kuhar','Natakar','Ostalo osebje']
+    funkcija = sez.index(funkcija)+1
     datum_zaposlitve = request.forms.datum_zaposlitve
     telefon = request.forms.telefon
     prebivalisce = request.forms.prebivalisce

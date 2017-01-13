@@ -7,7 +7,7 @@ povezava.row_factory = sqlite3.Row
 
 
 def seznamZaposlenih():
-    sql = '''SELECT id,ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,telefon,prebivalisce FROM zaposleni  ORDER BY datum_zaposlitve DESC'''
+    sql = '''SELECT id,ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,funkcija,telefon,prebivalisce FROM zaposleni  ORDER BY datum_zaposlitve DESC'''
     return list(povezava.execute(sql))
 
 def izdaniRacuni():
@@ -30,11 +30,6 @@ def seznamIzdelkov():
     for izdelek in p.fetchall():
         izdelki.append(izdelek[0])
     return izdelki
-
-
-def tabelaIzdelkov():
-    sql = '''SELECT ime,tip,zaloga,cena FROM izdelki ORDER BY ime'''
-    return list(povezava.execute(sql))
 
 
 def imeInCenaIzdelkov():
@@ -132,13 +127,19 @@ def vrniZaposlenega(mesto):
     povezava.commit()
     return sez
 
-def seznamImenovIzdelkov():
+def seznamImenIzdelkov():
     sql='''SELECT ime FROM izdelki ORDER BY ime ASC'''
     return list(povezava.execute(sql))
 
 
     
 ###############################################################################################
+# IZDELKI
+
+def tabelaIzdelkov():
+    sql = '''SELECT id,ime,tip,zaloga,cena FROM izdelki ORDER BY ime'''
+    return list(povezava.execute(sql))
+
 # VNESI IZDELEK
 
 def vnesiIzdelek(ime,zaloga,tip=None,cena = 0):

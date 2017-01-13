@@ -19,12 +19,18 @@
     <div class="form-group">
         <label for="e_posta">Elektronska pošta</label>
         <input value="{{zaposlen['e_posta']}}" placeholder="janez.novak@fmf.uni-lj.si" name="e_posta" type="text" class="form-control">
-        
-    </div>
+             
     <div class="form-group">
         <label for="funkcija">Funkcija</label>
-        <input value="{{zaposlen['funkcija']}}" placeholder="1" name="funkcija" type="text" class="form-control">
-        
+        <select value="{{zaposlen['funkcija']}}" class="form-control" id="funkcija" name="funkcija">
+          <option>Šef</option>
+          <option>Vodja izmene</option>
+          <option>Kuhar</option>
+          <option>Natakar</option>
+          <option>Ostalo osebje</option>
+        </select>
+    </div>
+
     </div>
     <div class="form-group">
         <label for="datum_zaposlitve">Datum zaposlitve</label>

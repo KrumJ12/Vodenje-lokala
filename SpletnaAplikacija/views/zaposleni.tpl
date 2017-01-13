@@ -78,6 +78,7 @@
         <th>Datum rojstva</th>
         <th>E-pošta</th>
         <th>Datum zaposlitve</th>
+        <th>Funkcija</th>
         <th>Telefon</th>
         <th>Prebivališče</th>
         <th>Uredi</th>
@@ -95,6 +96,7 @@
         <td>{{zaposlen['datum_rojstva']}}</td>
         <td>{{zaposlen['e_posta']}}</td>
         <td>{{zaposlen['datum_zaposlitve']}}</td>
+        <td>{{zaposlen['funkcija']}}</td>
         <td>{{zaposlen['telefon']}}</td>
         <td>{{zaposlen['prebivalisce']}}</td>
         <td><a href="/zaposleni/{{zaposlen['id']}}/uredi">
