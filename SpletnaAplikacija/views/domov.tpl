@@ -56,7 +56,7 @@
      <a href="/" type="submit" class="btn btn-primary">Izprazni račun</a>
  </td>
  <td>
-   <a href="/{{stari_niz}}" class="btn btn-primary">Zaključi račun</a>
+   <a href="/{{link}}" class="btn btn-primary">Zaključi račun</a>
  </td>
  </tr>
   </table>
@@ -72,7 +72,7 @@
   <div class="col-xs-6">
     <br>
 % for ime in imena.values():
-<a href="/?{{stari_niz}}&id={{ime['id']}}" class="btn btn-default btn-sm">{{ime['ime']}}</a>
+<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-default btn-sm">{{ime['ime']}}</a>
 % end
 
 

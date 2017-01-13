@@ -14,18 +14,19 @@ def domov():
         'domov',
         imena=modeli.tabIzdelkov(),
         izdelki = izdelki,
-        stari_niz='&'.join('id={}'.format(x) for x in izdelki)
+        link='&'.join('id={}'.format(x) for x in izdelki)
     )
 
-@route('/<stari_niz>')
-def vnesiRacun(stari_niz):
-    print(stari_niz)
-##    znesek = round(modeli.izracunajZnesek(sez),2)
-##    if znesek == 0:
-##        redirect('/')
-##        return
-##    modeli.vnesiRacun(znesek)
-    redirect('/')
+@route('/<link>')
+def vnesiRacun(link):
+    niz = '&'+link
+    izd = [int(x) for x in niz.split('&id=')[1:]]
+    znesek = round(modeli.izracunajZnesek(izd),2)
+    if znesek == 0:
+        redirect('/')
+        return
+    modeli.vnesiRacun(znesek)
+    redirect('/racun')
 ################################################
 # TABELA IZDANIH RAČUNOV
 @route('/racun')
