@@ -63,7 +63,6 @@
 
 
         
-      
 
 
 </div>
@@ -71,11 +70,26 @@
 
   <div class="col-xs-6">
     <br>
+  
 % for ime in imena.values():
+% if ime['tip'] == 'topli napitki':
 <a href="/?{{link}}&id={{ime['id']}}" class="btn btn-default btn-sm">{{ime['ime']}}</a>
 % end
+% if ime['tip'] == 'alkoholno':
+<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-danger btn-sm">{{ime['ime']}}</a>
+% end
+% if ime['tip'] == 'brezalkoholno':
+<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-primary btn-sm">{{ime['ime']}}</a>
+% end
+% if ime['tip'] == 'hrana':
+<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-warning btn-sm">{{ime['ime']}}</a>
+% end
+% else:
+<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-info btn-sm">{{ime['ime']}}</a>
+% end
+% end
 
-
+	
   </div>
 
 
