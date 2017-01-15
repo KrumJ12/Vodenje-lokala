@@ -11,17 +11,16 @@
   <h1>Vnesi račun:</h1><hr>
 
 
-<div class="radio">
-  <label><input type="radio" value = "optradio" name="optradio" checked>gotovina</label>
-</div>
-<div class="radio">
-  <label><input type="radio" value = "optradio" name="optradio">kartica</label>
-</div>
-<div class="radio">
-  <label><input type="radio" value = "optradio" name="optradio">dobavnica</label>
-</div>
 
-
+<a href="/?{{link}}&nacin=1">
+ Gotovina</a>
+ <br>
+<a href="/?{{link}}&nacin=2">
+ Kartica</a>
+ <br>
+ <a href="/?{{link}}&nacin=3">
+ Dobavnica</a>
+<br><br>
 <table class="table table-striped table-hover table-bordered">
 
     <thead>
@@ -56,7 +55,7 @@
      <a href="/" type="submit" class="btn btn-primary">Izprazni račun</a>
  </td>
  <td>
-   <a href="/{{link}}" class="btn btn-primary">Zaključi račun</a>
+   <a href="/{{plac}}&{{link}}" class="btn btn-primary">Zaključi račun</a>
  </td>
  </tr>
   </table>
@@ -73,19 +72,19 @@
   
 % for ime in imena.values():
 % if ime['tip'] == 'topli napitki':
-<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-default btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-default btn-sm">{{ime['ime']}}</a>
 % end
 % if ime['tip'] == 'alkoholno':
-<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-danger btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-danger btn-sm">{{ime['ime']}}</a>
 % end
 % if ime['tip'] == 'brezalkoholno':
-<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-primary btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-primary btn-sm">{{ime['ime']}}</a>
 % end
 % if ime['tip'] == 'hrana':
-<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-warning btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-warning btn-sm">{{ime['ime']}}</a>
 % end
 % else:
-<a href="/?{{link}}&id={{ime['id']}}" class="btn btn-info btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-info btn-sm">{{ime['ime']}}</a>
 % end
 % end
 

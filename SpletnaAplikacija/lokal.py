@@ -10,17 +10,20 @@ import modeli
 @route('/')
 def domov():
     izdelki = [int(x) for x in request.query.getall('id')]
+    nacin = request.query.getall('nacin')
     return template(
         'domov',
         imena=modeli.tabIzdelkov(),
         izdelki = izdelki,
+        nacin = nacin,
+        plac = '&'.join('nacin={}'.format(x) for x in nacin),
         link='&'.join('id={}'.format(x) for x in izdelki)
     )
 
 @route('/<link>')
 def vnesiRacun(link):
     niz = '&'+link
-    izd = [int(x) for x in niz.split('&id=')[1:]]
+    izd = [int(x) for x in niz.split('&id=')[1:-1]]
     znesek = round(modeli.izracunajZnesek(izd),2)
     if znesek == 0:
         redirect('/')
