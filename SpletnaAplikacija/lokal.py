@@ -35,6 +35,7 @@ def vnesiRacun(link):
         redirect('/')
         return
     modeli.vnesiRacun(znesek,moznosti[int(placilo)-1])
+    modeli.vnesiNakup(izd)
     redirect('/racun')
 ################################################
 # TABELA IZDANIH RAČUNOV

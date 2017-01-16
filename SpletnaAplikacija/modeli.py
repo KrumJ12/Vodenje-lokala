@@ -59,6 +59,19 @@ def vrniIDDobavitelja(naziv):
     sql = '''SELECT id FROM dobavitelji WHERE naziv = ?'''
     return list(p.execute(sql,[naziv]))[0][0]
 
+def vnesiNakup(seznam):
+    stavek = 'SELECT MAX(id) FROM racuni'
+    idracuna = list(p.execute(stavek))[0][0]
+
+    slovarIzd = {}
+    for izd in seznam:
+        slovarIzd[izd] = slovarIzd.get(izd,0) + 1
+
+    # sez oblike {12: 1, 13: 1, 14: 2}
+    for idizd in slovarIzd.keys():
+        stavek = 'INSERT INTO nakupi (id_racuna,id_izdelka,kolicina) VALUES (?,?,?)'
+        p.execute(stavek,(idracuna,idizd,slovarIzd[idizd]))
+    povezava.commit()
     
 def vnesiRacun(znesek,nacin_placila):
     # znesek je potrebno izračunati s funkcijo izracunajZnesek
@@ -83,7 +96,8 @@ def vnesiRacun(znesek,nacin_placila):
     id_natakarja = 15
     
     stavek = 'INSERT INTO racuni (id_natakarja,znesek,cas_nakupa,nacin_placila) VALUES (?,?,?,?)'
-    p. execute(stavek,(id_natakarja,znesek,cas_nakupa,nacin_placila))
+    p.execute(stavek,(id_natakarja,znesek,cas_nakupa,nacin_placila))
+    povezava.commit()
     
 def izracunajZnesek(sez):
     # dobi seznam izdelkov in izračuna znesek
