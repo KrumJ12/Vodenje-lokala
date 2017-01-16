@@ -149,6 +149,21 @@ def seznamImenIzdelkov():
 
 ####################################################################
 # AKCIJE
+def vrniIDizd(ime):
+    """Iz imena izdelka dobimo ID izdelka"""
+    sql = '''SELECT id FROM izdelki WHERE ime = ?'''
+    return list(p.execute(sql,[ime]))[0][0]
+
+# SPRMENI AKCIJO
+
+
+def spremeniAkcijo(ime,vrednost):
+    '''Obstojeci akciji bomo spremenili vrednost'''
+    stavek = 'UPDATE akcija SET vrednost= ? WHERE izdelek=?'
+    p.execute(stavek, (vrednost,ime))
+
+    povezava.commit()
+    
 # UREJANJE, BRISANJE AKCIJE
 def akcija(id_akc):
     sql = '''

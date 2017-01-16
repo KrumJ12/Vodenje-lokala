@@ -45,6 +45,15 @@ def akcija():
     return template('akcije',izdelki = modeli.tabIzdelkov(),
                     seznamAkcij=modeli.akcije())
 
+@post('/spremeniAkcijo')
+def spremeniAkcijo():
+    ime=request.forms.akcija
+    vrednost=int(request.forms.vrednost)
+    ime = ime.split(' - ')[1]
+    imeID = modeli.vrniIDizd(ime)
+    modeli.spremeniAkcijo(imeID,vrednost)
+    redirect('/akcije')
+
 @get('/akcije/<id_akc>/uredi')
 def uredi_akcijo(id_akc):
     return template(
