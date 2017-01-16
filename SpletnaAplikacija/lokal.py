@@ -37,6 +37,39 @@ def vnesiRacun(link):
     modeli.vnesiRacun(znesek,moznosti[int(placilo)-1])
     modeli.vnesiNakup(izd)
     redirect('/racun')
+    
+################################################
+# AKCIJE
+@route('/akcije')
+def akcija():
+    return template('akcije',izdelki = modeli.tabIzdelkov(),
+                    seznamAkcij=modeli.akcije())
+
+@get('/akcije/<id_akc>/uredi')
+def uredi_akcijo(id_akc):
+    return template(
+        'urediAkcijo',
+        akcija=modeli.akcija(id_akc))
+
+@post('/akcije/<id_akc>/uredi')
+def uredi_akcijo_submit(id_akc):
+    id_akc = request.forms.id_akc
+    izdelek = request.forms.izdelek
+    vrednost = request.forms.vrednost
+    modeli.uredi_akcijo(id_akc,izdelek,vrednost)
+    redirect('/akcije')
+
+@get('/akcije/<id_akc>/odstrani')
+def odstrani_izdelek(id_akc):
+    return template('odstraniAkcijo', izdelki = modeli.tabIzdelkov(),
+                    akcija = modeli.akcija(id_akc))
+
+@post('/akcije/<id_akc>/odstrani')
+def odstrani_akcijo(id_akc):
+    id_akc = request.forms.id_akc
+    modeli.odstrani_akcijo(id_akc)
+    redirect('/akcije')
+
 ################################################
 # TABELA IZDANIH RAČUNOV
 @route('/racun')

@@ -14,6 +14,10 @@ def izdaniRacuni():
     sql = '''SELECT id,id_natakarja,znesek,cas_nakupa,nacin_placila FROM racuni ORDER BY cas_nakupa DESC'''
     return list(povezava.execute(sql))
 
+def akcije():
+    sql = '''SELECT id,izdelek,zacetek_akcije,konec_akcije,vrednost FROM akcija ORDER BY izdelek ASC'''
+    return list(povezava.execute(sql))
+    
 def tabIzdelkov():
     sql = '''SELECT id,ime,zaloga,tip,cena FROM izdelki'''
     return {el['id']: el for el in povezava.execute(sql)}
@@ -143,6 +147,29 @@ def seznamImenIzdelkov():
     sql='''SELECT ime FROM izdelki ORDER BY ime ASC'''
     return list(povezava.execute(sql))
 
+####################################################################
+# AKCIJE
+# UREJANJE, BRISANJE AKCIJE
+def akcija(id_akc):
+    sql = '''
+        SELECT id,izdelek,vrednost FROM akcija
+        WHERE id = ?
+    '''
+    return povezava.execute(sql,[id_akc]).fetchone()
+    
+def uredi_akcijo(id_akc,izdelek,vrednost):
+    sql = '''
+        UPDATE akcija
+        SET izdelek = ?, vrednost = ?
+        WHERE id = ?
+    '''
+    povezava.execute(sql, [izdelek,vrednost,id_akc])
+    povezava.commit()
+
+def odstrani_akcijo(id_akc):
+    stavek = '''DELETE FROM akcija WHERE id = ?'''
+    povezava.execute(stavek,[id_akc])
+    povezava.commit()
 
     
 ###############################################################################################
