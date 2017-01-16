@@ -39,7 +39,17 @@ def vnesiRacun():
 @route('/akcije')
 def akcija():
     return template('akcije',izdelki = modeli.tabIzdelkov(),
+                    imena = modeli.seznamImenIzdelkov(),
                     seznamAkcij=modeli.akcije())
+
+@post('/dodajAkcijo')
+def dodajAkcijo():
+    ime = request.forms.izdelek
+    vrednost = request.forms.vrednost
+    imeID = modeli.vrniIDizd(ime)
+    modeli.dodajAkcijo(imeID,vrednost)
+    redirect('/akcije')
+
 
 @post('/spremeniAkcijo')
 def spremeniAkcijo():
@@ -49,6 +59,7 @@ def spremeniAkcijo():
     imeID = modeli.vrniIDizd(ime)
     modeli.spremeniAkcijo(imeID,vrednost)
     redirect('/akcije')
+
 
 @get('/akcije/<id_akc>/uredi')
 def uredi_akcijo(id_akc):

@@ -15,7 +15,7 @@ def izdaniRacuni():
     return list(povezava.execute(sql))
 
 def akcije():
-    sql = '''SELECT id,izdelek,zacetek_akcije,konec_akcije,vrednost FROM akcija ORDER BY izdelek ASC'''
+    sql = '''SELECT id,izdelek,vrednost FROM akcija ORDER BY izdelek ASC'''
     return list(povezava.execute(sql))
     
 def tabIzdelkov():
@@ -110,27 +110,11 @@ def izracunajZnesek(sez):
         stavek = 'SELECT cena FROM izdelki WHERE id = ?'
         znesek += list(p.execute(stavek,[st]))[0][0]
     return znesek
-
-def vnesiAkcijo(izdelek_ime, zacetek, konec, vrednost):
-    #zacetek in konec akcije sta v obliki llll-mm-dd
-    #vrednost akcije je med 0 in 100
-    #vneseš ime izdelka
-    sez_imen=seznamIzdelkov()
-    if izdelek_ime not in sez_imen:
-        raise Exception('Izdelka ni v bazi')
-    if zacetek[4] != '-' or zacetek[7] !='-':
-        raise Exception('Napačen čas začetka akcije')
-    if konec[4] != '-' or konec[7] !='-':
-        raise Exception('Napačen čas konca akcije')
-    if 0<=vrednost<=100:
-        raise Exception('Napačna vrednost akcije')
-    id_izdelka=seznamIzdelkov_id()[sez_imen.index(izdelek_ime)]
-    stavek = 'INSERT INTO akcija (izdelek, zacetek_akcije,konec_akcije,vrednost) VALUES (?,?,?,?)'
-    p.execute(stavek,(id_izdelka, zacetek, konec, vrednost))
-    povezava.commit()
-
     
-    
+def dodajAkcijo(id_izd, vrednost):
+    stavek = 'INSERT INTO akcija (izdelek,vrednost) VALUES (?,?)'
+    p.execute(stavek,(id_izd, vrednost))
+    povezava.commit()    
 
 def vrniZaposlenega(mesto):
     '''vnesi številko od 1 do 5. 1--> šef, 2--> vodja izmene, 3--> kuhar, 4--> natakar

@@ -1,22 +1,38 @@
 % rebase('osnova.tpl')
 
 
-
-
-
 <div class="container">
 
       <h4>Operacije</h4>
       <ul class="nav nav-pills nav-stacked">
 
         <li><a href="javascript:showhide('uniquename4')">Spremeni vrednost akcije</a></li>
+        <li><a href="javascript:showhide('uniquename5')">Dodaj akcijo</a></li> 
 
       </ul><br>
 
   
 
+<form action="/dodajAkcijo" method="post" id="uniquename5" style="display:none;">
+
+  <div class="form-group">
+    <label for="izdelek">Izdelek</label>
+    <select class="form-control" id="tip" name="izdelek">
+  %for izdelek in imena:
+      <option>{{izdelek['ime']}}</option>
+  %end
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="vrednost">Vrednost</label>
+    <input type="text" class="form-control" name = "vrednost" id="vrednost" aria-describedby="emailHelp" placeholder="Vnesi vrednost(med 0 in 100)">
+  </div>
 
 
+  <button type="submit" class="btn btn-primary">Potrdi</button>
+
+</form>
 
 <form action="/spremeniAkcijo" method="post" id="uniquename4" style="display:none;">
 
