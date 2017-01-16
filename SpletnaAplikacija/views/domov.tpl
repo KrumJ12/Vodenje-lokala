@@ -12,13 +12,13 @@
 
 
 
-<a href="/?{{link}}&nacin=1">
+<a href="/?&nacin=1&{{link}}">
  Gotovina</a>
  <br>
-<a href="/?{{link}}&nacin=2">
+<a href="/?&nacin=2&{{link}}">
  Kartica</a>
  <br>
- <a href="/?{{link}}&nacin=3">
+ <a href="/?&nacin=3&{{link}}">
  Dobavnica</a>
 <br><br>
 <table class="table table-striped table-hover table-bordered">

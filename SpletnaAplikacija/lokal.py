@@ -22,13 +22,19 @@ def domov():
 
 @route('/<link>')
 def vnesiRacun(link):
-    niz = '&'+link
-    izd = [int(x) for x in niz.split('&id=')[1:-1]]
+    niz = link
+    izdelki = niz[7:]
+    nacin = niz[:7]
+    moznosti = ['gotovina','kartica','dobavnica']
+    placilo = nacin[-1]
+    
+    izd = [int(x) for x in izdelki.split('&id=')[1:]]
+    
     znesek = round(modeli.izracunajZnesek(izd),2)
     if znesek == 0:
         redirect('/')
         return
-    modeli.vnesiRacun(znesek)
+    modeli.vnesiRacun(znesek,moznosti[int(placilo)-1])
     redirect('/racun')
 ################################################
 # TABELA IZDANIH RAČUNOV

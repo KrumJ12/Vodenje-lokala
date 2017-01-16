@@ -60,7 +60,7 @@ def vrniIDDobavitelja(naziv):
     return list(p.execute(sql,[naziv]))[0][0]
 
     
-def vnesiRacun(znesek):
+def vnesiRacun(znesek,nacin_placila):
     # znesek je potrebno izračunati s funkcijo izracunajZnesek
     # cas_nakupa bo ob vnosu računa
     # način plačila je niz 'gotovina','kartica','dobavnica'
@@ -81,8 +81,6 @@ def vnesiRacun(znesek):
 
     #id natakarja
     id_natakarja = 15
-    #nacin placila
-    nacin_placila = 'gotovina'
     
     stavek = 'INSERT INTO racuni (id_natakarja,znesek,cas_nakupa,nacin_placila) VALUES (?,?,?,?)'
     p. execute(stavek,(id_natakarja,znesek,cas_nakupa,nacin_placila))
