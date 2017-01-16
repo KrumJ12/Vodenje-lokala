@@ -10,17 +10,9 @@
 
   <h1>Vnesi račun:</h1><hr>
 
+<form method="post" action="/noviRacun">
 
 
-<a href="/?&nacin=1&{{link}}">
- Gotovina</a>
- <br>
-<a href="/?&nacin=2&{{link}}">
- Kartica</a>
- <br>
- <a href="/?&nacin=3&{{link}}">
- Dobavnica</a>
-<br><br>
 <table class="table table-striped table-hover table-bordered">
 
     <thead>
@@ -36,7 +28,10 @@
             % for el in izdelki:
             <tr>
             % if el != '':
-            <td>{{imena[el][1]}}</td>
+            <td>
+            	{{imena[el][1]}}
+            	<input name="izdelek" type="hidden" value="{{el}}">
+            </td>
             <td>{{imena[el][4]}}</td>
             %end
             % end
@@ -46,21 +41,22 @@
  <th>Skupaj</th>
 <th> 
 
-{{round(sum(imena[x][4] for x in izdelki),2)}}
+<input name="znesek" type="text" value="{{round(sum(imena[x][4] for x in izdelki),2)}}">
 
 
  </th>
- <tr>
- <td>
-     <a href="/" type="submit" class="btn btn-primary">Izprazni račun</a>
- </td>
- <td>
-   <a href="/{{plac}}&{{link}}" class="btn btn-primary">Zaključi račun</a>
- </td>
- </tr>
   </table>
+  <br>
 
+<h2>Izberi način plačila:</h2>
+<br>
+<label class="radio-inline"><input type="radio" value="1" name="placilo">Gotovina</label>
+<label class="radio-inline"><input type="radio" value="2" name="placilo">Kartica</label>
+<label class="radio-inline"><input type="radio" value="3" name="placilo">Dobavnica</label>
+<br><br><br>
+ <button type="submit" class="btn btn-primary">Zaključi račun</button>
 
+</form>
         
 
 

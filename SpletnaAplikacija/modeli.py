@@ -154,7 +154,7 @@ def vrniIDizd(ime):
     sql = '''SELECT id FROM izdelki WHERE ime = ?'''
     return list(p.execute(sql,[ime]))[0][0]
 
-# SPRMENI AKCIJO
+# SPREMENI AKCIJO
 
 
 def spremeniAkcijo(ime,vrednost):
