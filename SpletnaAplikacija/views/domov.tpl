@@ -26,15 +26,20 @@
 
     <tbody>
 
-            % for el in izdelki:
+            % for izdelek in izdelki:
             <tr>
-            % if el != '':
+            % if izdelek != '':
             <td>
-            	{{imena[el][1]}}
-            	<input name="izdelek" type="hidden" value="{{el}}">
+            	{{imena[izdelek][1]}}
+            	<input name="izdelek" type="hidden" value="{{izdelek}}">
             </td>
-            <td>{{imena[el][4]}}</td>
-            <td>{{akcija[el-1]}}</td>
+            <td>{{imena[izdelek][4]}} €</td>
+            % if akcija[izdelek-1] == '/':
+            <td> {{akcija[izdelek-1]}} </td>
+            % else :
+            <td>{{akcija[izdelek-1]}} €</td>
+
+            % end
             %end
             % end
 </tr>
@@ -42,10 +47,13 @@
 
  <th>Skupaj</th>
 <th> 
+ <label>
+<input name="znesek2" type="hidden" value="{{round(sum(imena[x][4] for x in izdelki),2)}}">{{round(sum(imena[izdelek][4] for izdelek in izdelki),2)}} €
+</label>
 
-<input name="znesek2" type="text" value="{{round(sum(imena[x][4] for x in izdelki),2)}}">
-<input name="znesek" type="text" value="{{znesek}}">
-
+ </th>
+ <th>
+ <label><input name="znesek" type="hidden" value="{{znesek}}">{{znesek}} €</label>
  </th>
   </table>
   <br>
@@ -55,6 +63,15 @@
 <label class="radio-inline"><input type="radio" value="1" name="placilo" checked >Gotovina</label>
 <label class="radio-inline"><input type="radio" value="2" name="placilo">Kartica</label>
 <label class="radio-inline"><input type="radio" value="3" name="placilo">Dobavnica</label>
+<br><br>
+
+<h3>Delovno mesto:</h3>
+
+% for natakar in natakarji:
+
+<label class="radio-inline"><input type="radio" value="{{natakar['id']}}" name="id_nat">{{natakar['id']}}</label>
+% end
+
 <br><br><br>
  <button type="submit" class="btn btn-primary">Zaključi račun</button>
 

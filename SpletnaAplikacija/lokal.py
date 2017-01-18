@@ -16,24 +16,21 @@ def domov():
         imena=modeli.tabIzdelkov(),
         izdelki = izdelki,
         nacin = nacin,
-        akcija=modeli.izracunajZnesekSez(),
-        znesek=modeli.izracunajZnesek(izdelki),
+        akcija = modeli.izracunajZnesekSez(),
+        znesek = modeli.izracunajZnesek(izdelki),
+        natakarji = modeli.seznamNatakarjev(),
         plac = '&'.join('nacin={}'.format(x) for x in nacin),
-        link='&'.join('id={}'.format(x) for x in izdelki)
-    )
-
+        link='&'.join('id={}'.format(x) for x in izdelki))
 
 @post('/noviRacun')
 def vnesiRacun():
     placilo = int(request.forms.getall('placilo')[0])
     znesek = float(request.forms.getall('znesek')[0])
     izdelki = request.forms.getall('izdelek')
+    id_natakarja = request.forms.getall('id_nat')[0]
     moznosti = ['gotovina','kartica','dobavnica']
-    modeli.vnesiRacun(znesek,moznosti[placilo-1])
-    modeli.vnesiNakup(izdelki)
-    print(znesek,moznosti[placilo-1],izdelki)
-    print(request.forms.getall('znesek'))
-    
+    modeli.vnesiRacun(znesek,moznosti[placilo-1],id_natakarja)
+    modeli.vnesiNakup(izdelki)  
     redirect('/racun')
 
     

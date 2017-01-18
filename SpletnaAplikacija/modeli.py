@@ -10,9 +10,7 @@ def seznamZaposlenih():
     sql = '''SELECT id,ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,funkcija,telefon,prebivalisce FROM zaposleni  ORDER BY datum_zaposlitve DESC'''
     return list(povezava.execute(sql))
 
-def izdaniRacuni():
-    sql = '''SELECT id,id_natakarja,znesek,cas_nakupa,nacin_placila FROM racuni ORDER BY cas_nakupa DESC'''
-    return list(povezava.execute(sql))
+
 
 def akcije():
     sql = '''SELECT id,izdelek,vrednost FROM akcija ORDER BY izdelek ASC'''
@@ -25,6 +23,103 @@ def tabIzdelkov():
 def imeCena(idizd):
     sql = '''SELECT ime,cena FROM izdelki WHERE id = ?'''
     return list(povezava.execute(sql),[idizd])
+
+def seznamIzdelkov():
+    izdelki = []
+    p.execute('SELECT ime FROM izdelki')
+    for izdelek in p.fetchall():
+        izdelki.append(izdelek[0])
+    return izdelki
+
+
+def imeInCenaIzdelkov():
+    sql = '''SELECT ime,cena FROM izdelki ORDER BY tip'''
+    return list(povezava.execute(sql))
+
+def seznamIzdelkov_id():
+    izdelki=[]
+    p.execute('SELECT id FROM izdelki')
+    for izdelek in p.fetchall():
+        izdelki.append(izdelek[0])
+    return izdelki
+
+def seznamPogodb():
+    sql = '''SELECT ime,tip,veljavnost,id_dobavitelja,id FROM pogodba'''
+    return list(povezava.execute(sql))
+
+def seznamDobaviteljev():
+    sql = '''SELECT id,naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji'''
+    return list(povezava.execute(sql))
+
+def imenaDobaviteljev():
+    sql = '''SELECT naziv FROM dobavitelji'''
+    return list(povezava.execute(sql))
+
+def vrniIDDobavitelja(naziv):
+    sql = '''SELECT id FROM dobavitelji WHERE naziv = ?'''
+    return list(p.execute(sql,[naziv]))[0][0]
+
+def vrniZaposlenega(mesto):
+    '''vnesi številko od 1 do 5. 1--> šef, 2--> vodja izmene, 3--> kuhar, 4--> natakar
+5--> ostalo osebje'''
+    sez=[]
+    stavek= 'SELECT ime, priimek FROM zaposleni WHERE funkcija = ?'
+    p.execute(stavek, (str(mesto)))
+    for zaposlen in p.fetchall():
+        sez.append(zaposlen)
+    povezava.commit()
+    return sez
+
+def seznamImenIzdelkov():
+    sql='''SELECT ime FROM izdelki ORDER BY ime ASC'''
+    return list(povezava.execute(sql))
+
+##########################################################
+# SEZNAM NATAKARJEV
+def seznamNatakarjev():
+    sql = '''SELECT id FROM zaposleni WHERE funkcija=4'''
+    return list(povezava.execute(sql))
+
+
+##########################################################
+# VNESI RAČUN, NAKUP
+
+def vnesiNakup(seznam):
+    stavek = 'SELECT MAX(id) FROM racuni'
+    idracuna = list(p.execute(stavek))[0][0]
+
+    slovarIzd = {}
+    for izd in seznam:
+        slovarIzd[izd] = slovarIzd.get(izd,0) + 1
+
+    # sez oblike {12: 1, 13: 1, 14: 2}
+    for idizd in slovarIzd.keys():
+        stavek = 'INSERT INTO nakupi (id_racuna,id_izdelka,kolicina) VALUES (?,?,?)'
+        p.execute(stavek,(idracuna,idizd,slovarIzd[idizd]))
+    povezava.commit()
+    
+def vnesiRacun(znesek,nacin_placila,id_natakarja):
+    # znesek je potrebno izračunati s funkcijo izracunajZnesek
+    # cas_nakupa bo ob vnosu računa
+    # način plačila je niz 'gotovina','kartica','dobavnica'
+
+    #cas nakupa ob vnosu racuna
+    dt = datetime.now()
+    tt = dt.timetuple()
+    sezCasNakupa = []
+    i = 0
+    while i < 5:
+        sezCasNakupa.append(str(tt[i]))
+        i+=1
+    for i in range(1,5):
+        if len(sezCasNakupa[i]) <2:
+            sezCasNakupa[i] = "0"+sezCasNakupa[i]
+    tt = sezCasNakupa
+    cas_nakupa = tt[0]+"-"+tt[1]+"-"+tt[2]+" "+tt[3]+":"+tt[4]
+    if znesek > 0:    
+        stavek = 'INSERT INTO racuni (id_natakarja,znesek,cas_nakupa,nacin_placila) VALUES (?,?,?,?)'
+        p.execute(stavek,(id_natakarja,znesek,cas_nakupa,nacin_placila))
+        povezava.commit()
 
 def vrniCeno(id_izd):
     stavek= 'SELECT cena FROM izdelki WHERE id = ?'
@@ -65,106 +160,16 @@ def izracunajZnesekSez():
             vrednost=(100-int(vrednost_akcij[id_akcij.index(int(id_izd))]))/100
             znesek.append(round(float(vrniCeno(id_izd)) * vrednost,2))
         else:
-            znesek.append( None)
+            znesek.append("/")
     return znesek
 
+###################################################################
+# IZDANI RAČUNI
 
-def seznamIzdelkov():
-    izdelki = []
-    p.execute('SELECT ime FROM izdelki')
-    for izdelek in p.fetchall():
-        izdelki.append(izdelek[0])
-    return izdelki
-
-
-def imeInCenaIzdelkov():
-    sql = '''SELECT ime,cena FROM izdelki ORDER BY tip'''
+def izdaniRacuni():
+    sql = '''SELECT id,id_natakarja,znesek,cas_nakupa,nacin_placila FROM racuni ORDER BY cas_nakupa DESC'''
     return list(povezava.execute(sql))
 
-def seznamIzdelkov_id():
-    izdelki=[]
-    p.execute('SELECT id FROM izdelki')
-    for izdelek in p.fetchall():
-        izdelki.append(izdelek[0])
-    return izdelki
-
-def seznamPogodb():
-    sql = '''SELECT ime,tip,veljavnost,id_dobavitelja,id FROM pogodba'''
-    return list(povezava.execute(sql))
-
-def seznamDobaviteljev():
-    sql = '''SELECT id,naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji'''
-    return list(povezava.execute(sql))
-
-def imenaDobaviteljev():
-    sql = '''SELECT naziv FROM dobavitelji'''
-    return list(povezava.execute(sql))
-
-def vrniIDDobavitelja(naziv):
-    sql = '''SELECT id FROM dobavitelji WHERE naziv = ?'''
-    return list(p.execute(sql,[naziv]))[0][0]
-
-def vnesiNakup(seznam):
-    stavek = 'SELECT MAX(id) FROM racuni'
-    idracuna = list(p.execute(stavek))[0][0]
-
-    slovarIzd = {}
-    for izd in seznam:
-        slovarIzd[izd] = slovarIzd.get(izd,0) + 1
-
-    # sez oblike {12: 1, 13: 1, 14: 2}
-    for idizd in slovarIzd.keys():
-        stavek = 'INSERT INTO nakupi (id_racuna,id_izdelka,kolicina) VALUES (?,?,?)'
-        p.execute(stavek,(idracuna,idizd,slovarIzd[idizd]))
-    povezava.commit()
-    
-def vnesiRacun(znesek,nacin_placila):
-    # znesek je potrebno izračunati s funkcijo izracunajZnesek
-    # cas_nakupa bo ob vnosu računa
-    # način plačila je niz 'gotovina','kartica','dobavnica'
-
-    #cas nakupa ob vnosu racuna
-    dt = datetime.now()
-    tt = dt.timetuple()
-    sezCasNakupa = []
-    i = 0
-    while i < 5:
-        sezCasNakupa.append(str(tt[i]))
-        i+=1
-    for i in range(1,5):
-        if len(sezCasNakupa[i]) <2:
-            sezCasNakupa[i] = "0"+sezCasNakupa[i]
-    tt = sezCasNakupa
-    cas_nakupa = tt[0]+"-"+tt[1]+"-"+tt[2]+" "+tt[3]+":"+tt[4]
-
-    #id natakarja
-    id_natakarja = 15
-    
-    stavek = 'INSERT INTO racuni (id_natakarja,znesek,cas_nakupa,nacin_placila) VALUES (?,?,?,?)'
-    p.execute(stavek,(id_natakarja,znesek,cas_nakupa,nacin_placila))
-    povezava.commit()
-    
-
-    
-def dodajAkcijo(id_izd, vrednost):
-    stavek = 'INSERT INTO akcija (izdelek,vrednost) VALUES (?,?)'
-    p.execute(stavek,(id_izd, vrednost))
-    povezava.commit()    
-
-def vrniZaposlenega(mesto):
-    '''vnesi številko od 1 do 5. 1--> šef, 2--> vodja izmene, 3--> kuhar, 4--> natakar
-5--> ostalo osebje'''
-    sez=[]
-    stavek= 'SELECT ime, priimek FROM zaposleni WHERE funkcija = ?'
-    p.execute(stavek, (str(mesto)))
-    for zaposlen in p.fetchall():
-        sez.append(zaposlen)
-    povezava.commit()
-    return sez
-
-def seznamImenIzdelkov():
-    sql='''SELECT ime FROM izdelki ORDER BY ime ASC'''
-    return list(povezava.execute(sql))
 
 ####################################################################
 # AKCIJE
@@ -175,6 +180,10 @@ def vrniIDizd(ime):
 
 # SPREMENI AKCIJO
 
+def dodajAkcijo(id_izd, vrednost):
+    stavek = 'INSERT INTO akcija (izdelek,vrednost) VALUES (?,?)'
+    p.execute(stavek,(id_izd, vrednost))
+    povezava.commit()  
 
 def spremeniAkcijo(ime,vrednost):
     '''Obstojeci akciji bomo spremenili vrednost'''
