@@ -41,7 +41,7 @@
  <th>Skupaj</th>
 <th> 
 
-<input name="znesek" type="text" value="{{round(sum(imena[x][4] for x in izdelki),2)}}">
+<input name="znesek2" type="text" value="{{round(sum(imena[x][4] for x in izdelki),2)}}">
 <input name="znesek" type="text" value="{{znesek}}">
 
  </th>

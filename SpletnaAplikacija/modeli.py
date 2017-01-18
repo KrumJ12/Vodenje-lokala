@@ -127,13 +127,7 @@ def vnesiRacun(znesek,nacin_placila):
     p.execute(stavek,(id_natakarja,znesek,cas_nakupa,nacin_placila))
     povezava.commit()
     
-def izracunajZnesek(sez):
-    # dobi seznam izdelkov in izračuna znesek
-    znesek = 0
-    for st in sez:
-        stavek = 'SELECT cena FROM izdelki WHERE id = ?'
-        znesek += list(p.execute(stavek,[st]))[0][0]
-    return znesek
+
     
 def dodajAkcijo(id_izd, vrednost):
     stavek = 'INSERT INTO akcija (izdelek,vrednost) VALUES (?,?)'
