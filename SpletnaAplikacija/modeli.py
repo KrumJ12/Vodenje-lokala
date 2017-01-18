@@ -49,7 +49,24 @@ def izracunajZnesek(sez_izd):
             znesek+= float(vrniCeno(id_izd))
     return round(znesek,2)
 
-
+def izracunajZnesekSez():
+    '''funkcija vrne seznam cen izdelkov z akcijo'''
+    # dobi seznam izdelkov in izračuna znesek
+    znesek = []
+    #seznam izdelkov in njihova cena
+    sez_id_cena=[]
+    #seznam akcij --> id-jev izdelkov in vrednost akcije
+    id_akcij=list( x['izdelek']for x in akcije())
+    vrednost_akcij=list(x['vrednost'] for x in akcije())
+    for id_izd in sorted(seznamIzdelkov_id()):
+        #če je izdelek v akciji
+        if int(id_izd) in id_akcij:
+            #vrednost iz '40' pretvorimo v 0.6 koef. s katerim pomnožimo prvotno ceno 
+            vrednost=(100-int(vrednost_akcij[id_akcij.index(int(id_izd))]))/100
+            znesek.append(round(float(vrniCeno(id_izd)) * vrednost,2))
+        else:
+            znesek.append( None)
+    return znesek
 
 
 def seznamIzdelkov():

@@ -16,6 +16,7 @@ def domov():
         imena=modeli.tabIzdelkov(),
         izdelki = izdelki,
         nacin = nacin,
+        akcija=modeli.izracunajZnesekSez(),
         znesek=modeli.izracunajZnesek(izdelki),
         plac = '&'.join('nacin={}'.format(x) for x in nacin),
         link='&'.join('id={}'.format(x) for x in izdelki)

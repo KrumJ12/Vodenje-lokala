@@ -20,6 +20,7 @@
       
         <th>Izdelek</th>
         <th>Cena</th>
+        <th>Akcijska cena</th>
       </tr>
     </thead>
 
@@ -33,6 +34,7 @@
             	<input name="izdelek" type="hidden" value="{{el}}">
             </td>
             <td>{{imena[el][4]}}</td>
+            <td>{{akcija[el-1]}}</td>
             %end
             % end
 </tr>
