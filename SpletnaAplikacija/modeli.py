@@ -5,21 +5,6 @@ povezava = sqlite3.connect('lokal.db')
 p = povezava.cursor()
 povezava.row_factory = sqlite3.Row
 
-
-def seznamZaposlenih():
-    sql = '''SELECT id,ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,funkcija,telefon,prebivalisce FROM zaposleni  ORDER BY datum_zaposlitve DESC'''
-    return list(povezava.execute(sql))
-
-
-
-def akcije():
-    sql = '''SELECT id,izdelek,vrednost FROM akcija ORDER BY izdelek ASC'''
-    return list(povezava.execute(sql))
-    
-def tabIzdelkov():
-    sql = '''SELECT id,ime,zaloga,tip,cena FROM izdelki'''
-    return {el['id']: el for el in povezava.execute(sql)}
-
 def imeCena(idizd):
     sql = '''SELECT ime,cena FROM izdelki WHERE id = ?'''
     return list(povezava.execute(sql),[idizd])
@@ -51,9 +36,6 @@ def seznamDobaviteljev():
     sql = '''SELECT id,naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji'''
     return list(povezava.execute(sql))
 
-def imenaDobaviteljev():
-    sql = '''SELECT naziv FROM dobavitelji'''
-    return list(povezava.execute(sql))
 
 def vrniIDDobavitelja(naziv):
     sql = '''SELECT id FROM dobavitelji WHERE naziv = ?'''
@@ -70,14 +52,26 @@ def vrniZaposlenega(mesto):
     povezava.commit()
     return sez
 
-def seznamImenIzdelkov():
-    sql='''SELECT ime FROM izdelki ORDER BY ime ASC'''
-    return list(povezava.execute(sql))
+
 
 ##########################################################
 # SEZNAM NATAKARJEV
 def seznamNatakarjev():
     sql = '''SELECT id FROM zaposleni WHERE funkcija=4'''
+    return list(povezava.execute(sql))
+
+# GUMBI IZDELKOV
+
+def tabelaIzdelkovORD():
+    sql = '''SELECT id,ime,tip,zaloga,cena FROM izdelki ORDER BY id ASC'''
+    return list(povezava.execute(sql))
+
+def tabelaIzdelkovTIP():
+    sql = '''SELECT id,ime,tip,zaloga,cena FROM izdelki ORDER BY tip,ime'''
+    return list(povezava.execute(sql))
+
+def tabelaIzdelkovIME():
+    sql = '''SELECT id,ime,tip,zaloga,cena FROM izdelki ORDER BY ime'''
     return list(povezava.execute(sql))
 
 
@@ -124,6 +118,10 @@ def vnesiRacun(znesek,nacin_placila,id_natakarja):
 def vrniCeno(id_izd):
     stavek= 'SELECT cena FROM izdelki WHERE id = ?'
     return list(p.execute(stavek,[id_izd]))[0][0]
+
+def akcije():
+    sql = '''SELECT id,izdelek,vrednost FROM akcija ORDER BY izdelek ASC'''
+    return list(povezava.execute(sql))
 
 def izracunajZnesek(sez_izd):
     # dobi seznam izdelkov in izračuna znesek
@@ -177,6 +175,14 @@ def vrniIDizd(ime):
     """Iz imena izdelka dobimo ID izdelka"""
     sql = '''SELECT id FROM izdelki WHERE ime = ?'''
     return list(p.execute(sql,[ime]))[0][0]
+
+def tabIzdelkov():
+    sql = '''SELECT id,ime,zaloga,tip,cena FROM izdelki'''
+    return {el['id']: el for el in povezava.execute(sql)}
+
+def seznamImenIzdelkov():
+    sql='''SELECT ime FROM izdelki ORDER BY ime ASC'''
+    return list(povezava.execute(sql))
 
 # SPREMENI AKCIJO
 
@@ -274,6 +280,12 @@ def odstrani_izdelek(id_izd):
     povezava.commit()
 
 ###############################################################################################
+# ZAPOSLENI
+
+def seznamZaposlenih():
+    sql = '''SELECT id,ime,priimek,datum_rojstva,e_posta,datum_zaposlitve,funkcija,telefon,prebivalisce FROM zaposleni  ORDER BY datum_zaposlitve DESC'''
+    return list(povezava.execute(sql))
+
 # VNESI ZAPOSLENEGA
 def vnesiZaposlenega(ime,priimek,datum_rojstva,e_posta,funkcija,telefon,prebivalisce):
     # id se dodeli sam (AUTO INCREMENT)
@@ -359,6 +371,12 @@ def odstrani_pogodbo(id_pog):
     povezava.commit()
     
 ###############################################################################################
+# DOBAVITELJI
+
+def imenaDobaviteljev():
+    sql = '''SELECT naziv FROM dobavitelji'''
+    return list(povezava.execute(sql))
+
 # VNESI DOBAVITELJA
 
 def vnesiDobavitelja(naziv,naslov,telefon,e_posta,davcna_stevilka,trr):

@@ -25,15 +25,14 @@
     </thead>
 
     <tbody>
-
             % for izdelek in izdelki:
             <tr>
             % if izdelek != '':
             <td>
-            	{{imena[izdelek][1]}}
+            	{{imena[izdelek-1][1]}}
             	<input name="izdelek" type="hidden" value="{{izdelek}}">
             </td>
-            <td>{{imena[izdelek][4]}} €</td>
+            <td>{{imena[izdelek-1][4]}} €</td>
             % if akcija[izdelek-1] == '/':
             <td> {{akcija[izdelek-1]}} </td>
             % else :
@@ -48,7 +47,7 @@
  <th>Skupaj</th>
 <th> 
  <label>
-<input name="znesek2" type="hidden" value="{{round(sum(imena[x][4] for x in izdelki),2)}}">{{round(sum(imena[izdelek][4] for izdelek in izdelki),2)}} €
+<input name="znesek2" type="hidden" value="{{round(sum(imena[x-1][4] for x in izdelki),2)}}">{{round(sum(imena[izdelek-1][4] for izdelek in izdelki),2)}} €
 </label>
 
  </th>
@@ -65,7 +64,7 @@
 <label class="radio-inline"><input type="radio" value="3" name="placilo">Dobavnica</label>
 <br><br>
 
-<h3>Delovno mesto:</h3>
+<h3>Natakar:</h3>
 
 % for natakar in natakarji:
 
@@ -85,21 +84,21 @@
   <div class="col-xs-6">
     <br>
   
-% for ime in imena.values():
+% for ime in imenaTIP:
 % if ime['tip'] == 'topli napitki':
-<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-default btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-default btn-xs">{{ime['ime']}}</a>
 
 % elif ime['tip'] == 'alkoholno':
-<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-danger btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-danger btn-xs">{{ime['ime']}}</a>
 
 % elif ime['tip'] == 'brezalkoholno':
-<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-primary btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-primary btn-xs">{{ime['ime']}}</a>
 
 % elif ime['tip'] == 'hrana':
-<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-warning btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-warning btn-xs">{{ime['ime']}}</a>
 
 % else:
-<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-info btn-sm">{{ime['ime']}}</a>
+<a href="/?{{plac}}&{{link}}&id={{ime['id']}}" class="btn btn-info btn-xs">{{ime['ime']}}</a>
 % end
 % end
 

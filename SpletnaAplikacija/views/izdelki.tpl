@@ -123,7 +123,7 @@
 
     <tbody>
 
-%for izdelek in izdelki:
+%for izdelek in izdelkiIme:
   <tr>
   <td>{{izdelek['ime']}}</td>
   <td>{{izdelek['tip']}}</td>

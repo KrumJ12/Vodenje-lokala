@@ -1,7 +1,7 @@
 % rebase('osnova.tpl')
 
 <div class="container">
-  <h2>Izdani računi</h2>         
+  <h2>Izdani računi:</h2>         
   <table class="table">
 
     <thead>

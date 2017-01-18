@@ -13,7 +13,8 @@ def domov():
     nacin = request.query.getall('nacin')
     return template(
         'domov',
-        imena=modeli.tabIzdelkov(),
+        imena=modeli.tabelaIzdelkovORD(),
+        imenaTIP = modeli.tabelaIzdelkovTIP(),
         izdelki = izdelki,
         nacin = nacin,
         akcija = modeli.izracunajZnesekSez(),
@@ -98,7 +99,7 @@ def racun():
 @route('/izdelki')
 def izdelki():
     return template('izdelki',imena=modeli.seznamImenIzdelkov(),
-                    izdelki = modeli.tabelaIzdelkov())
+                    izdelkiIme = modeli.tabelaIzdelkovIME())
 
 @post('/spremeniCeno')
 def spremeniCeno():
