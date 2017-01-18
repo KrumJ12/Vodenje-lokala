@@ -28,7 +28,10 @@ def vnesiRacun():
     placilo = int(request.forms.getall('placilo')[0])
     znesek = float(request.forms.getall('znesek')[0])
     izdelki = request.forms.getall('izdelek')
-    id_natakarja = request.forms.getall('id_nat')[0]
+    try:
+        id_natakarja = request.forms.getall('id_nat')[0]
+    except:
+        id_natakarja= '7'
     moznosti = ['gotovina','kartica','dobavnica']
     modeli.vnesiRacun(znesek,moznosti[placilo-1],id_natakarja)
     modeli.vnesiNakup(izdelki)  
