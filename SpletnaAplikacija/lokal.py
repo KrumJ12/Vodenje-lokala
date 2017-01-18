@@ -16,6 +16,7 @@ def domov():
         imena=modeli.tabIzdelkov(),
         izdelki = izdelki,
         nacin = nacin,
+        znesek=modeli.izracunajZnesek(izdelki),
         plac = '&'.join('nacin={}'.format(x) for x in nacin),
         link='&'.join('id={}'.format(x) for x in izdelki)
     )
@@ -30,6 +31,7 @@ def vnesiRacun():
     modeli.vnesiRacun(znesek,moznosti[placilo-1])
     modeli.vnesiNakup(izdelki)
     print(znesek,moznosti[placilo-1],izdelki)
+    print(request.forms.getall('znesek'))
     
     redirect('/racun')
 

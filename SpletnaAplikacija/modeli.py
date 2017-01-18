@@ -26,6 +26,30 @@ def imeCena(idizd):
     sql = '''SELECT ime,cena FROM izdelki WHERE id = ?'''
     return list(povezava.execute(sql),[idizd])
 
+def vrniCeno(id_izd):
+    stavek= 'SELECT cena FROM izdelki WHERE id = ?'
+    return list(p.execute(stavek,[id_izd]))[0][0]
+
+def izracunajZnesek(sez_izd):
+    # dobi seznam izdelkov in izračuna znesek
+    znesek = 0
+
+    #seznam izdelkov in njihova cena
+    sez_id_cena=[]
+    #seznam akcij --> id-jev izdelkov in vrednost akcije
+    id_akcij=list( x['izdelek']for x in akcije())
+    vrednost_akcij=list(x['vrednost'] for x in akcije())
+    for id_izd in sez_izd:
+        #če je izdelek v akciji
+        if int(id_izd) in id_akcij:
+            #vrednost iz '40' pretvorimo v 0.6 koef. s katerim pomnožimo prvotno ceno 
+            vrednost=(100-int(vrednost_akcij[id_akcij.index(int(id_izd))]))/100
+            znesek+= float(vrniCeno(id_izd)) * vrednost
+        else:
+            znesek+= float(vrniCeno(id_izd))
+    return round(znesek,2)
+
+
 
 
 def seznamIzdelkov():
