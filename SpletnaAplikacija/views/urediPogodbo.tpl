@@ -14,7 +14,7 @@
 
     <div class="form-group">
         <label for="veljavnost">Veljavnost do</label>
-        <input value="{{pogodba['veljavnost']}}" placeholder="051 000 999" name="veljavnost" type="text" class="form-control">
+        <input value="{{pogodba['veljavnost']}}" placeholder="2017-10" name="veljavnost" type="text" class="form-control">
     </div>
 
 

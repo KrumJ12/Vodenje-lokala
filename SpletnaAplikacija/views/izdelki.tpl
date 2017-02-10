@@ -111,6 +111,7 @@
 
     <thead>
       <tr>
+        <th>ID</th>
         <th>Ime</th>
         <th>Tip</th>
         <th>Zaloga</th>
@@ -125,6 +126,7 @@
 
 %for izdelek in izdelkiIme:
   <tr>
+  <td>{{izdelek['id']}}</td>
   <td>{{izdelek['ime']}}</td>
   <td>{{izdelek['tip']}}</td>
   <td>{{izdelek['zaloga']}}</td>

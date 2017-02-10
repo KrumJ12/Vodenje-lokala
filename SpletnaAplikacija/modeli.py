@@ -76,7 +76,7 @@ def tabelaIzdelkovIME():
 
 
 ##########################################################
-# VNESI RAČUN, NAKUP
+# VNESI RAČUN, NAKUP, POPRAVI ZALOGO
 
 def vnesiNakup(seznam):
     stavek = 'SELECT MAX(id) FROM racuni'
@@ -114,6 +114,16 @@ def vnesiRacun(znesek,nacin_placila,id_natakarja):
         stavek = 'INSERT INTO racuni (id_natakarja,znesek,cas_nakupa,nacin_placila) VALUES (?,?,?,?)'
         p.execute(stavek,(id_natakarja,znesek,cas_nakupa,nacin_placila))
         povezava.commit()
+
+def popraviZalogo(seznam):
+    slovarIzd = {}
+    for izd in seznam:
+        slovarIzd[izd] = slovarIzd.get(izd,0) + 1
+    # sez oblike {12: 1, 13: 1, 14: 2}
+    for idizd in slovarIzd.keys():
+        stavek = 'UPDATE izdelki SET zaloga = zaloga - ? WHERE id = ?'
+        p.execute(stavek,(slovarIzd[idizd],idizd))
+    povezava.commit()
 
 def vrniCeno(id_izd):
     stavek= 'SELECT cena FROM izdelki WHERE id = ?'
@@ -168,7 +178,9 @@ def izdaniRacuni():
     sql = '''SELECT id,id_natakarja,znesek,cas_nakupa,nacin_placila FROM racuni ORDER BY cas_nakupa DESC'''
     return list(povezava.execute(sql))
 
-
+def kajJeNaRacunu():
+    sql = '''SELECT id_racuna,ime,kolicina FROM nakupi JOIN izdelki ON nakupi.id_izdelka = izdelki.id ORDER BY id_racuna DESC'''
+    return list(povezava.execute(sql))
 ####################################################################
 # AKCIJE
 def vrniIDizd(ime):
@@ -244,8 +256,10 @@ def vnesiIzdelek(ime,zaloga,tip=None,cena = 0):
 def spremeniCeno(ime_izdelka,nova_cena):
     '''danemu izdelku bomo spremenili ceno'''
     if ime_izdelka in seznamIzdelkov():
+        try: float(nova_cena)
+        except: raise Exception ('Podaj ceno v celi/decimalni obliki')
         stavek = 'UPDATE izdelki SET cena= ? WHERE ime=?'
-        p.execute(stavek, (nova_cena, ime_izdelka))
+        p.execute(stavek, (float(nova_cena), ime_izdelka))
     else:
         raise Exception ('Izdeleka še ni v tabeli')
     povezava.commit()
@@ -266,6 +280,12 @@ def izdelek(id_izd):
     return povezava.execute(sql,[id_izd]).fetchone()
     
 def uredi_izdelek(id_izd,ime,tip,zaloga,cena):
+    if tip not in ('alkoholno','brezalkoholno','tobak in ostalo','topli napitki','hrana'):
+        raise Exception('Izberi tip izdelka')
+    try: int(zaloga)
+    except: raise Exception ('Podaj zalogo v celih številih')
+    try: float(cena)
+    except: raise Exception ('Podaj ceno v celi/decimalni obliki')
     sql = '''
         UPDATE izdelki
         SET ime = ?, tip = ?, zaloga = ?, cena = ?
@@ -319,6 +339,8 @@ def zaposlen(id_zap):
     return povezava.execute(sql, [id_zap]).fetchone()
     
 def uredi_zaposlenega(id_zap, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce):
+    if datum_rojstva[4] != '-' or datum_rojstva[7] != '-':
+        raise Exception ('Napačna oblika datuma rojstva')
     sql = '''
         UPDATE zaposleni
         SET ime = ?, priimek = ?, datum_rojstva = ?, e_posta = ?, funkcija = ?, datum_zaposlitve = ?, telefon = ?, prebivalisce = ?
@@ -356,6 +378,8 @@ def pogodba(id_pog):
     return povezava.execute(sql, [id_pog]).fetchone()
     
 def uredi_pogodbo(id_pog, tip, veljavnost, ime):
+    if veljavnost[4] != "-":
+        raise Exception('Datum pogodbe je neveljaven')
     sql = '''
         UPDATE pogodba
         SET tip = ?, veljavnost = ?, ime = ?
@@ -412,6 +436,12 @@ def pogodbeDobaviteljev(id_dob):
     return povezava.execute(stavek,[id_dob]).fetchall()
 
 def uredi_dobavitelja(id_dob,naziv,naslov,telefon,e_posta,davcna_stevilka,trr):
+    if not "@" in e_posta:
+        raise Exception('Nepravilen zapis e-pošte')
+    if len(str(davcna_stevilka)) != 8:
+        raise Exception('Nepravilna davčna številka')
+    if len(trr) != 23:
+        raise Exception('Nepravilen TRR')
     stavek = '''UPDATE dobavitelji
     SET naziv = ?, naslov =?, telefon=?, e_posta=?, davcna_stevilka=?,trr=?
     WHERE id = ?'''

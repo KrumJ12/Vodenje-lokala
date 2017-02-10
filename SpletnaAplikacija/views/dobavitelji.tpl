@@ -60,6 +60,7 @@
 
     <thead>
       <tr>
+        <th>ID dobavitelja </th>
         <th>Naziv</th>
         <th>Naslov</th>
         <th>Telefon</th>
@@ -77,7 +78,7 @@
     % for dobavitelj in seznam:
       <tr>
 
-
+        <td>{{dobavitelj['id']}}</td>
         <td>{{dobavitelj['naziv']}}</td>
         <td>{{dobavitelj['naslov']}}</td>
         <td>{{dobavitelj['telefon']}}</td>

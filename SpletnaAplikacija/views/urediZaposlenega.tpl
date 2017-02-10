@@ -34,7 +34,7 @@
     </div>
     <div class="form-group">
         <label for="datum_zaposlitve">Datum zaposlitve</label>
-        <input value="{{zaposlen['datum_zaposlitve'] or ''}}" placeholder="2016-01-01" name="datum_zaposlitve" type="text" class="form-control">
+        <input value="{{zaposlen['datum_zaposlitve'] or ''}}" placeholder="2016-01-01" name="datum_zaposlitve" type="text" class="form-control" disabled>
         
     </div>
     <div class="form-group">

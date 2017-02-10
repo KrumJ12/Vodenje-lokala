@@ -25,16 +25,18 @@ def domov():
 
 @post('/noviRacun')
 def vnesiRacun():
-    placilo = int(request.forms.getall('placilo')[0])
-    znesek = float(request.forms.getall('znesek')[0])
+    placilo = int(request.forms.getone('placilo'))
+    znesek = float(request.forms.getone('znesek'))
     izdelki = request.forms.getall('izdelek')
+    # če ni določen id_natakarja
     try:
         id_natakarja = request.forms.getall('id_nat')[0]
-    except:
-        id_natakarja= '7'
+    except: # vzame prvega
+        id_natakarja = modeli.seznamNatakarjev()[0][0]
     moznosti = ['gotovina','kartica','dobavnica']
     modeli.vnesiRacun(znesek,moznosti[placilo-1],id_natakarja)
-    modeli.vnesiNakup(izdelki)  
+    modeli.vnesiNakup(izdelki)
+    modeli.popraviZalogo(izdelki)
     redirect('/racun')
 
     
@@ -95,7 +97,8 @@ def odstrani_akcijo(id_akc):
 @route('/racun')
 def racun():
     return template(
-        'racun',seznam = modeli.izdaniRacuni())
+        'racun',seznam = modeli.izdaniRacuni(),
+        naRacunu = modeli.kajJeNaRacunu())
 #################################################
 
 # IZDELKI
@@ -107,7 +110,7 @@ def izdelki():
 @post('/spremeniCeno')
 def spremeniCeno():
     ime=request.forms.izdelek
-    cena=float(request.forms.cena)
+    cena=request.forms.cena
     modeli.spremeniCeno(ime,cena)
     redirect('/izdelki')
 
