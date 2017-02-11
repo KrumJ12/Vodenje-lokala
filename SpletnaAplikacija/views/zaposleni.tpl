@@ -96,7 +96,7 @@
         <td>{{zaposlen['datum_rojstva']}}</td>
         <td>{{zaposlen['e_posta']}}</td>
         <td>{{zaposlen['datum_zaposlitve']}}</td>
-        <td>{{zaposlen['funkcija']}}</td>
+        <td>{{fun[zaposlen['funkcija']-1]}}</td>
         <td>{{zaposlen['telefon']}}</td>
         <td>{{zaposlen['prebivalisce']}}</td>
         <td><a href="/zaposleni/{{zaposlen['id']}}/uredi">

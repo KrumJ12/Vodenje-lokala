@@ -68,7 +68,7 @@
         <th>Ime</th>
         <th>Tip</th>
         <th>Veljavnost</th>
-		    <th>ID Dobavitelja te pogodbe</th>
+		<th>Dobavitelj</th>
         <th>Uredi</th>
         <th>Izbriši</th>
 
@@ -82,7 +82,7 @@
         <td>{{pogodba['ime']}}</td>
         <td>{{pogodba['tip']}}</td>
         <td>{{pogodba['veljavnost']}}</td>
-		    <td>{{pogodba['id_dobavitelja']}}</td>
+		<td>{{dobavitelji[pogodba['id_dobavitelja']-1]['naziv']}}</td>
         <td><a href="/pogodbe/{{pogodba['id']}}/uredi">
                             <i class="glyphicon glyphicon-pencil"></i></a></td>
         <td><a href="/pogodbe/{{pogodba['id']}}/odstrani">

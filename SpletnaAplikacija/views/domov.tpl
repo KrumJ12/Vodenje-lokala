@@ -67,7 +67,7 @@
 <h3>Natakar:</h3>
 
 % for natakar in natakarji:
-<label class="radio-inline"><input type="radio" value="{{natakar['id']}}" name="id_nat">{{natakar['id']}}</label>
+<label class="radio-inline"><input type="radio" value="{{natakar['ime']}}" name="id_nat">{{natakar['ime']}}</label>
 % end
 
 <br><br><br>

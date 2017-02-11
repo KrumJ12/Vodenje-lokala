@@ -167,7 +167,7 @@ def odstrani_izdelek(id_izd):
 @route('/zaposleni')
 def zaposleni():
     return template(
-        'zaposleni',seznam = modeli.seznamZaposlenih())
+        'zaposleni',seznam = modeli.seznamZaposlenih(), fun=modeli.funkcijaVLokalu())
 
 @post('/zaposleni')
 def zaposleni():
@@ -222,7 +222,9 @@ def odstrani_zaposlenega(id_zap):
 @route('/pogodbe')
 def pogodbe():
     return template(
-        'pogodbe',seznam=modeli.seznamPogodb(),imena=modeli.imenaDobaviteljev())
+        'pogodbe',seznam=modeli.seznamPogodb(),
+        imena=modeli.imenaDobaviteljev(),
+        dobavitelji=modeli.seznamDobaviteljev())
 
 @post('/pogodbe')
 def dodaj_pogodbo():

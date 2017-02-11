@@ -57,7 +57,7 @@ def vrniZaposlenega(mesto):
 ##########################################################
 # SEZNAM NATAKARJEV
 def seznamNatakarjev():
-    sql = '''SELECT id FROM zaposleni WHERE funkcija=4'''
+    sql = '''SELECT id,ime FROM zaposleni WHERE funkcija=4'''
     return list(povezava.execute(sql))
 
 # GUMBI IZDELKOV
@@ -73,6 +73,8 @@ def tabelaIzdelkovTIP():
 def tabelaIzdelkovIME():
     sql = '''SELECT id,ime,tip,zaloga,cena FROM izdelki ORDER BY ime'''
     return list(povezava.execute(sql))
+
+
 
 
 ##########################################################
@@ -326,6 +328,8 @@ def vnesiZaposlenega(ime,priimek,datum_rojstva,e_posta,funkcija,telefon,prebival
     povezava.execute(stavek, (ime,priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce))
     povezava.commit()
 
+def funkcijaVLokalu():
+    return ['šef', 'vodja izmene' , 'kuhar', 'natakar', 'ostalo osebje']
 
 
 # UREJANJE ZAPOSLENEGA
