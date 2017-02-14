@@ -16,6 +16,10 @@ def seznamIzdelkov():
         izdelki.append(izdelek[0])
     return izdelki
 
+def slovarIzdelkov():
+    sql = '''SELECT id,ime,zaloga,tip,cena FROM izdelki'''
+    return {el['id']: el for el in povezava.execute(sql)}
+
 
 def imeInCenaIzdelkov():
     sql = '''SELECT ime,cena FROM izdelki ORDER BY tip'''
@@ -27,10 +31,6 @@ def seznamIzdelkov_id():
     for izdelek in p.fetchall():
         izdelki.append(izdelek[0])
     return izdelki
-
-def seznamPogodb():
-    sql = '''SELECT ime,tip,veljavnost,id_dobavitelja,id FROM pogodba'''
-    return list(povezava.execute(sql))
 
 def seznamDobaviteljev():
     sql = '''SELECT id,naziv,naslov,telefon,e_posta,davcna_stevilka,trr FROM dobavitelji'''
@@ -65,6 +65,8 @@ def seznamNatakarjev():
 def tabelaIzdelkovORD():
     sql = '''SELECT id,ime,tip,zaloga,cena FROM izdelki ORDER BY id ASC'''
     return list(povezava.execute(sql))
+
+
 
 def tabelaIzdelkovTIP():
     sql = '''SELECT id,ime,tip,zaloga,cena FROM izdelki ORDER BY tip,ime'''
@@ -135,43 +137,29 @@ def akcije():
     sql = '''SELECT id,izdelek,vrednost FROM akcija ORDER BY izdelek ASC'''
     return list(povezava.execute(sql))
 
+def slovarAkcij():
+    sql = '''SELECT id,izdelek,vrednost FROM akcija'''
+    return {el['izdelek']: el['vrednost'] for el in povezava.execute(sql)}
+
+def slovarCen():
+    sql = '''SELECT id,cena FROM izdelki'''
+    return {el['id']: el['cena'] for el in povezava.execute(sql)}
+
 def izracunajZnesek(sez_izd):
     # dobi seznam izdelkov in izračuna znesek
     znesek = 0
+    # slovar akcij
+    slAkcij = slovarAkcij()
+    # slovar Cen izdelkov
+    slCen = slovarCen()
 
-    #seznam izdelkov in njihova cena
-    sez_id_cena=[]
-    #seznam akcij --> id-jev izdelkov in vrednost akcije
-    id_akcij=list( x['izdelek']for x in akcije())
-    vrednost_akcij=list(x['vrednost'] for x in akcije())
     for id_izd in sez_izd:
-        #če je izdelek v akciji
-        if int(id_izd) in id_akcij:
-            #vrednost iz '40' pretvorimo v 0.6 koef. s katerim pomnožimo prvotno ceno 
-            vrednost=(100-int(vrednost_akcij[id_akcij.index(int(id_izd))]))/100
-            znesek+= float(vrniCeno(id_izd)) * vrednost
+        if id_izd in slAkcij.keys():
+            vrednost = (100-slAkcij[id_izd])/100
+            znesek += slCen[id_izd]*vrednost
         else:
-            znesek+= float(vrniCeno(id_izd))
+            znesek += slCen[id_izd]
     return round(znesek,2)
-
-def izracunajZnesekSez():
-    '''funkcija vrne seznam cen izdelkov z akcijo'''
-    # dobi seznam izdelkov in izračuna znesek
-    znesek = []
-    #seznam izdelkov in njihova cena
-    sez_id_cena=[]
-    #seznam akcij --> id-jev izdelkov in vrednost akcije
-    id_akcij=list( x['izdelek']for x in akcije())
-    vrednost_akcij=list(x['vrednost'] for x in akcije())
-    for id_izd in sorted(seznamIzdelkov_id()):
-        #če je izdelek v akciji
-        if int(id_izd) in id_akcij:
-            #vrednost iz '40' pretvorimo v 0.6 koef. s katerim pomnožimo prvotno ceno 
-            vrednost=(100-int(vrednost_akcij[id_akcij.index(int(id_izd))]))/100
-            znesek.append(round(float(vrniCeno(id_izd)) * vrednost,2))
-        else:
-            znesek.append("/")
-    return znesek
 
 ###################################################################
 # IZDANI RAČUNI
@@ -359,6 +347,17 @@ def odstrani_zaposlenega(id_zap):
     povezava.commit()
 
 ###############################################################################################
+# PRIKAŽI POGODBE
+
+def seznamPogodb():
+    sql = '''SELECT ime,tip,veljavnost,id_dobavitelja,id FROM pogodba'''
+    return list(povezava.execute(sql))
+
+def IDimeDobaviteljev():
+    sql = '''SELECT id,naziv,trr FROM dobavitelji'''
+    return {el['id']: el for el in povezava.execute(sql)}
+
+
 # VNESI POGODBO
 
 def vnesiPogodbo(ime,id_dobavitelja,tip,veljavnost):

@@ -72,7 +72,7 @@
 
     <thead>
       <tr>
-      
+        <th>ID</th>
         <th>Ime</th>
         <th>Priimek</th>
         <th>Datum rojstva</th>
@@ -90,7 +90,7 @@
 
     % for zaposlen in seznam:
       <tr>
-
+        <td>{{zaposlen['id']}}</td>
         <td>{{zaposlen['ime']}}</td>
         <td>{{zaposlen['priimek']}}</td>
         <td>{{zaposlen['datum_rojstva']}}</td>

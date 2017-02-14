@@ -82,7 +82,8 @@
         <td>{{pogodba['ime']}}</td>
         <td>{{pogodba['tip']}}</td>
         <td>{{pogodba['veljavnost']}}</td>
-		<td>{{dobavitelji[pogodba['id_dobavitelja']-1]['naziv']}}</td>
+	
+        <td>{{pogodba['id_dobavitelja']}} - {{dobavitelji[pogodba['id_dobavitelja']]['naziv]}}</td>
         <td><a href="/pogodbe/{{pogodba['id']}}/uredi">
                             <i class="glyphicon glyphicon-pencil"></i></a></td>
         <td><a href="/pogodbe/{{pogodba['id']}}/odstrani">

@@ -29,14 +29,15 @@
             <tr>
             % if izdelek != '':
             <td>
-            	{{imena[izdelek-1][1]}}
+            	{{imena[izdelek][1]}}
             	<input name="izdelek" type="hidden" value="{{izdelek}}">
             </td>
-            <td>{{imena[izdelek-1][4]}} €</td>
-            % if akcija[izdelek-1] == '/':
-            <td> {{akcija[izdelek-1]}} </td>
+            <td>{{imena[izdelek][4]}} €</td>
+
+            % if izdelek in akcija.keys():
+            <td> {{round(imena[izdelek][4]*(100-akcija[izdelek])/100,2)}} €</td>
             % else :
-            <td>{{akcija[izdelek-1]}} €</td>
+            <td> / </td>
 
             % end
             %end
@@ -47,7 +48,7 @@
  <th>Skupaj</th>
 <th> 
  <label>
-<input name="znesek2" type="hidden" value="{{round(sum(imena[x-1][4] for x in izdelki),2)}}">{{round(sum(imena[izdelek-1][4] for izdelek in izdelki),2)}} €
+<input name="znesek2" type="hidden" value="{{round(sum(imena[x][4] for x in izdelki),2)}}">{{round(sum(imena[izdelek][4] for izdelek in izdelki),2)}} €
 </label>
 
  </th>

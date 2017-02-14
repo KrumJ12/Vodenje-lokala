@@ -13,11 +13,11 @@ def domov():
     nacin = request.query.getall('nacin')
     return template(
         'domov',
-        imena=modeli.tabelaIzdelkovORD(),
+        imena=modeli.slovarIzdelkov(),
         imenaTIP = modeli.tabelaIzdelkovTIP(),
         izdelki = izdelki,
         nacin = nacin,
-        akcija = modeli.izracunajZnesekSez(),
+        akcija = modeli.slovarAkcij(),
         znesek = modeli.izracunajZnesek(izdelki),
         natakarji = modeli.seznamNatakarjev(),
         plac = '&'.join('nacin={}'.format(x) for x in nacin),
@@ -224,7 +224,7 @@ def pogodbe():
     return template(
         'pogodbe',seznam=modeli.seznamPogodb(),
         imena=modeli.imenaDobaviteljev(),
-        dobavitelji=modeli.seznamDobaviteljev())
+        dobavitelji=modeli.IDimeDobaviteljev())
 
 @post('/pogodbe')
 def dodaj_pogodbo():
