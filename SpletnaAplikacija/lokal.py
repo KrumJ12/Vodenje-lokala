@@ -201,10 +201,9 @@ def uredi_zaposlenega_submit(id_zap):
     funkcija = request.forms.funkcija
     sez = ['Šef','Vodja izmene','Kuhar','Natakar','Ostalo osebje']
     funkcija = sez.index(funkcija)+1
-    datum_zaposlitve = request.forms.datum_zaposlitve
     telefon = request.forms.telefon
     prebivalisce = request.forms.prebivalisce
-    modeli.uredi_zaposlenega(id_zap, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce)
+    modeli.uredi_zaposlenega(id_zap, ime, priimek,datum_rojstva,e_posta,funkcija,telefon,prebivalisce)
     redirect('/zaposleni')
 
 @get('/zaposleni/<id_zap>/odstrani')

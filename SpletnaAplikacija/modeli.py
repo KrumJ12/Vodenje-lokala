@@ -330,15 +330,15 @@ def zaposlen(id_zap):
     '''
     return povezava.execute(sql, [id_zap]).fetchone()
     
-def uredi_zaposlenega(id_zap, ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce):
+def uredi_zaposlenega(id_zap, ime, priimek,datum_rojstva,e_posta,funkcija,telefon,prebivalisce):
     if datum_rojstva[4] != '-' or datum_rojstva[7] != '-':
         raise Exception ('Napačna oblika datuma rojstva')
     sql = '''
         UPDATE zaposleni
-        SET ime = ?, priimek = ?, datum_rojstva = ?, e_posta = ?, funkcija = ?, datum_zaposlitve = ?, telefon = ?, prebivalisce = ?
+        SET ime = ?, priimek = ?, datum_rojstva = ?, e_posta = ?, funkcija = ?, telefon = ?, prebivalisce = ?
         WHERE id = ?
     '''
-    povezava.execute(sql, [ime, priimek,datum_rojstva,e_posta,funkcija,datum_zaposlitve,telefon,prebivalisce, id_zap])
+    povezava.execute(sql, [ime, priimek,datum_rojstva,e_posta,funkcija,telefon,prebivalisce, id_zap])
     povezava.commit()
 
 def odstrani_zaposlenega(id_zap):
