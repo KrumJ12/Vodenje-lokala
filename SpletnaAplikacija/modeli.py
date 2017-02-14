@@ -289,6 +289,11 @@ def odstrani_izdelek(id_izd):
     povezava.execute(stavek,[id_izd])
     povezava.commit()
 
+def odstrani_akcijo(id_izd):
+    stavek = '''DELETE FROM akcija WHERE izdelek = ?'''
+    povezava.execute(stavek,[id_izd])
+    povezava.commit()
+
 ###############################################################################################
 # ZAPOSLENI
 

@@ -160,6 +160,7 @@ def odstrani_izdelek(id_izd):
 def odstrani_izdelek(id_izd):
     id_izd = request.forms.id_izd
     modeli.odstrani_izdelek(id_izd)
+    modeli.odstrani_akcijo(id_izd)
     redirect('/izdelki')
     
 ######### ######### ######### #########
